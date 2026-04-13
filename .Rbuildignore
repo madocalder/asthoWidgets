@@ -1,3 +1,4 @@
 ^asthoWidgets\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
+^\.lintr$
