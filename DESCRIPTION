@@ -1,13 +1,13 @@
 Package: asthoWidgets
-Title: Provide widget functions for use in asthoProfile2025 shiny application
+Title: Provide widget functions for use in asthoProfile2025 shiny
+    application
 Version: 0.0.0.9000
 Authors@R: 
     person("Madoc", "Alder", , "profile@astho.org", role = c("aut", "cre"))
 Description: Widgets for use in the asthoProfile2025 application.
 License: file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
+Depends: 
+    R (>= 4.1)
 Suggests: 
     covr,
     cyclocomp,
@@ -18,3 +18,7 @@ Suggests:
     testthat (>= 3.0.0),
     usethis
 Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
