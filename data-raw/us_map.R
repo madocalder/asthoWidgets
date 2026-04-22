@@ -14,23 +14,26 @@ us_map <- purrr::map2(
   function(region, new_region) {
     region$fips <- as.numeric(region$fips)
     region$path <- new_region$path
-    return(region)
-})
+
+    region
+  }
+)
 
 # - Used in finance and covid pages
 us_map2 <- purrr::map(
   m3[[1]]$mapData,
   function(region) {
     region$fips <- as.numeric(region$fips)
-    return(region)
-})
+
+    region
+  }
+)
 
 # Ensure `id`, `name` and `fips` matches between `us_map3` and `us_map`
 # - Used in governance, structure, activities pages
 us_map3 <- purrr::map(
   m4[[1]]$mapData,
   function(region) {
-
     # IDs are mismatched between `us_map` and `mapdata4.json`
     shift_region_id <- function(x) {
       paste0("id", -1 + as.integer(gsub("id", "", x)))
@@ -43,15 +46,17 @@ us_map3 <- purrr::map(
         x$id == region$id
       })
 
-    if(length(cn) == 0){
+    if (length(cn) == 0) {
       cat("Could not find:", region$id, "\n")
       return(region)
     }
 
     region$fips <- as.numeric(cn[[1]]$fips)
     region$name <- cn[[1]]$name
-    return(region)
-})
+
+    region
+  }
+)
 
 usethis::use_data(us_map2, overwrite = TRUE)
 usethis::use_data(us_map3, overwrite = TRUE)
