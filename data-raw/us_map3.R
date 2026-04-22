@@ -4,7 +4,6 @@ library(dplyr)
 
 m <- jsonlite::read_json("data-raw/json-shapefiles/mapdata.json")
 m2 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata2.json")
-m3 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata3.json")
 m4 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata4.json")
 
 us_map <- m[[1]]$mapData
@@ -13,11 +12,7 @@ us_map <- purrr::map2(us_map, m2[[1]]$mapData, \(m1, m2) {
   m1$path <- m2$path
   return(m1)
 })
-us_map2 <- m3[[1]]$mapData
-us_map2 <- purrr::map(us_map2, \(m) {
-  m$fips <- as.numeric(m$fips)
-  return(m)
-})
+
 us_map3 <- m4[[1]]$mapData
 us_map3 <- purrr::map(us_map3, \(m3) {
   m3$id <- m3$id |>
@@ -41,15 +36,4 @@ us_map3 <- purrr::map(us_map3, \(m3) {
   return(m3)
 })
 
-separators <- m2[[2]]$mapData
-separators2 <- m4[[2]]$mapData
-
-test_data <- us_map |>
-  purrr::map_dfr(as.data.frame) |>
-  select(id, name, fips) |>
-  mutate(
-    value = 1e5 * abs(rt(n(), df = 10))
-  )
-
-usethis::use_data(us_map, us_map2, us_map3, separators, separators2, overwrite = TRUE, internal = TRUE)
-usethis::use_data(test_data, overwrite = TRUE)
+usethis::use_data(us_map3, overwrite = TRUE)
