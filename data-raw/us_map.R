@@ -18,6 +18,7 @@ us_map <- purrr::map2(
 })
 
 # Ensure `id`, `name` and `fips` matches between `us_map3` and `us_map`
+# - Used in governance, structure, activities pages
 us_map3 <- purrr::map(
   m4[[1]]$mapData,
   function(region) {
