@@ -2,9 +2,11 @@ library(dplyr)
 
 # Requires R >= 4.1.0, due to use of \(){} function shorthand
 
-m <- jsonlite::read_json("data-raw/json-shapefiles/mapdata.json")
-m2 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata2.json")
-m4 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata4.json")
+sh_dir <- file.path("data-raw", "json-shapefiles")
+m <- jsonlite::read_json(file.path(sh_dir, "mapdata.json"))
+m2 <- jsonlite::read_json(file.path(sh_dir, "mapdata2.json"))
+m3 <- jsonlite::read_json(file.path(sh_dir, "mapdata3.json"))
+m4 <- jsonlite::read_json(file.path(sh_dir, "mapdata4.json"))
 
 # Ensure 'fips' is an integer
 # Ensure region shape/geometry comes from mapdata2.json
@@ -14,6 +16,14 @@ us_map <- purrr::map2(
   function(region, new_region) {
     region$fips <- as.numeric(region$fips)
     region$path <- new_region$path
+    return(region)
+})
+
+# - Used in finance and covid pages
+us_map2 <- purrr::map(
+  m3[[1]]$mapData,
+  function(region) {
+    region$fips <- as.numeric(region$fips)
     return(region)
 })
 
@@ -45,4 +55,5 @@ us_map3 <- purrr::map(
     return(region)
 })
 
+usethis::use_data(us_map2, overwrite = TRUE)
 usethis::use_data(us_map3, overwrite = TRUE)
