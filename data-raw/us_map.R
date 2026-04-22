@@ -1,7 +1,5 @@
 library(dplyr)
 
-# Requires R >= 4.1.0, due to use of \(){} function shorthand
-
 sh_dir <- file.path("data-raw", "json-shapefiles")
 m <- jsonlite::read_json(file.path(sh_dir, "mapdata.json"))
 m2 <- jsonlite::read_json(file.path(sh_dir, "mapdata2.json"))
