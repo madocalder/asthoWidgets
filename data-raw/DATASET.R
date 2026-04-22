@@ -1,9 +1,11 @@
 library(dplyr)
 
-m <- jsonlite::read_json("inst/mapdata.json")
-m2 <- jsonlite::read_json("inst/mapdata2.json")
-m3 <- jsonlite::read_json("inst/mapdata3.json")
-m4 <- jsonlite::read_json("inst/mapdata4.json")
+# Requires R >= 4.1.0, due to use of \(){} function shorthand
+
+m <- jsonlite::read_json("data-raw/json-shapefiles/mapdata.json")
+m2 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata2.json")
+m3 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata3.json")
+m4 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata4.json")
 
 us_map <- m[[1]]$mapData
 us_map <- purrr::map2(us_map, m2[[1]]$mapData, \(m1, m2) {
