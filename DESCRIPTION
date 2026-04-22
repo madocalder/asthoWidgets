@@ -1,7 +1,7 @@
 Package: asthoWidgets
 Title: Provide widget functions for use in asthoProfile2025 shiny
     application
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Madoc", "Alder", , "profile@astho.org", role = c("aut", "cre"))
 Description: Widgets for use in the asthoProfile2025 application.
