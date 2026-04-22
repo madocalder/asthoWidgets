@@ -6,34 +6,42 @@ m <- jsonlite::read_json("data-raw/json-shapefiles/mapdata.json")
 m2 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata2.json")
 m4 <- jsonlite::read_json("data-raw/json-shapefiles/mapdata4.json")
 
-us_map <- m[[1]]$mapData
-us_map <- purrr::map2(us_map, m2[[1]]$mapData, \(m1, m2) {
-  m1$fips <- as.numeric(m1$fips)
-  m1$path <- m2$path
-  return(m1)
+# Ensure 'fips' is an integer
+# Ensure region shape/geometry comes from mapdata2.json
+us_map <- purrr::map2(
+  m[[1]]$mapData,
+  m2[[1]]$mapData,
+  function(region, new_region) {
+    region$fips <- as.numeric(region$fips)
+    region$path <- new_region$path
+    return(region)
 })
 
-us_map3 <- m4[[1]]$mapData
-us_map3 <- purrr::map(us_map3, \(m3) {
-  m3$id <- m3$id |>
-    (\(.) gsub("id", "", .))() |>
-    as.integer() |>
-    (\(.) . - 1)() |>
-    (\(.) paste0("id", .))()
+# Ensure `id`, `name` and `fips` matches between `us_map3` and `us_map`
+us_map3 <- purrr::map(
+  m4[[1]]$mapData,
+  function(region) {
 
-  cn <- us_map |>
-    purrr::keep(\(x) {
-      x$id == m3$id
-    })
+    # IDs are mismatched between `us_map` and `mapdata4.json`
+    shift_region_id <- function(x) {
+      paste0("id", -1 + as.integer(gsub("id", "", x)))
+    }
+    region$id <- shift_region_id(region$id)
 
-  if(length(cn) == 0){
-    cat("Could not find:", m3$id, "\n")
-    return(m3)
-  }
+    # Get the matching region from `us_map`
+    cn <- us_map |>
+      purrr::keep(function(x) {
+        x$id == region$id
+      })
 
-  m3$fips <- as.numeric(cn[[1]]$fips)
-  m3$name <- cn[[1]]$name
-  return(m3)
+    if(length(cn) == 0){
+      cat("Could not find:", region$id, "\n")
+      return(region)
+    }
+
+    region$fips <- as.numeric(cn[[1]]$fips)
+    region$name <- cn[[1]]$name
+    return(region)
 })
 
 usethis::use_data(us_map3, overwrite = TRUE)
