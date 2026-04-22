@@ -11,6 +11,10 @@ RoxygenNote: 7.3.3
 Suggests: 
     covr,
     cyclocomp,
+    dplyr,
+    jsonlite,
     lintr,
-    testthat (>= 3.0.0)
+    purrr,
+    testthat (>= 3.0.0),
+    usethis
 Config/testthat/edition: 3
