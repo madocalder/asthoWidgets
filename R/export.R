@@ -2,7 +2,6 @@
 #'
 #' @param   hc   A highchart object
 #' @param   export_options   List of options for controlling how exporting works
-#' @export
 
 viz_export <- function(
     hc,
