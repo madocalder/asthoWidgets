@@ -66,7 +66,9 @@ add_data_layers_to_map <- function(
     highcharter::hc_tooltip(
       pointFormat = tooltip_options$pointFormat,
       headerFormat = c(
-        tooltip_options$headerFormat %||% "<span style=\"color:{point.color}\">\u25CF</span> {point.JurisdictionName}"
+        tooltip_options$headerFormat %||% (
+          "<span style=\"color:{point.color}\">\u25CF</span> {point.JurisdictionName}"
+        )
       ),
       useHTML = tooltip_options$useHTML %||% TRUE
     )
@@ -118,5 +120,5 @@ add_data_layers_to_map <- function(
       )
     )
 
-  return(hc)
+  hc
 }
