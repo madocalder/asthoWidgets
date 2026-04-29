@@ -52,8 +52,7 @@ add_data_layers_to_map <- function(
     subtitle_options = list(),
     caption_options = list(),
     tooltip_options = list(),
-    legend_options = list()
-) {
+    legend_options = list()) {
   # An attempt was made to replace this with highcharter::highchartProxy() and to use data-updating
   # The data-layers in the map were not updated via the proxy though
 
