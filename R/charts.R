@@ -220,13 +220,14 @@ add_column_chart <- function(hc,
     highcharter::hc_xAxis(
       type = "category",
       categories = xAxis_options$categories %||% unique(as.character(data[[x_col]])),
-      title = list(text = xAxis_options$title %||% NULL)
+      title = list(text = xAxis_options$title %||% NULL),
+      labels = labels_with_style(xAxis_options$labels)
     ) |>
     highcharter::hc_yAxis(
       title = list(text = yAxis_options$title %||% NULL),
       min = yAxis_options$min %||% 0,
       max = yAxis_options$max,
-      labels = yAxis_options$labels %||% list()
+      labels = labels_with_style(yAxis_options$labels)
     ) |>
     highcharter::hc_plotOptions(
       column = list(
@@ -323,13 +324,14 @@ add_line_chart <- function(hc,
     highcharter::hc_xAxis(
       type = "category",
       categories = xAxis_options$categories %||% unique(as.character(data[[x_col]])),
-      title = list(text = xAxis_options$title %||% NULL)
+      title = list(text = xAxis_options$title %||% NULL),
+      labels = labels_with_style(xAxis_options$labels)
     ) |>
     highcharter::hc_yAxis(
       title = list(text = yAxis_options$title %||% NULL),
       min = yAxis_options$min %||% 0,
       max = yAxis_options$max,
-      labels = yAxis_options$labels %||% list()
+      labels = labels_with_style(yAxis_options$labels)
     ) |>
     highcharter::hc_plotOptions(
       line = list(
@@ -432,6 +434,38 @@ add_word_cloud <- function(hc,
 }
 
 # Internal helpers ------------------------------------------------------------
+
+#' Default font/colour applied to axis labels.
+#'
+#' Highcharts replaces (rather than merges) the theme's
+#' \code{xAxis$labels$style} block when a chart specifies its own
+#' \code{labels} object, even if that object only sets \code{format}. If
+#' the resulting labels have no \code{style$fontSize} the client-side
+#' \code{labelMetrics()} call crashes with
+#' \code{Cannot read properties of undefined (reading 'fontSize')}. This
+#' default mirrors the values set in \code{get_astho_hc_theme()} so axes
+#' keep their theme styling whenever a caller overrides only the format.
+#' @noRd
+default_axis_label_style <- function() {
+  list(
+    fontFamily = "Jost",
+    fontSize = "15px",
+    fontWeight = "normal",
+    color = "#666"
+  )
+}
+
+#' Ensure axis label options always carry a \code{style} block.
+#'
+#' Pass a user-supplied \code{labels} list (or \code{NULL}); returns a
+#' list with \code{style} set to \code{default_axis_label_style()} when
+#' the caller hasn't supplied one of their own.
+#' @noRd
+labels_with_style <- function(opts) {
+  if (is.null(opts)) opts <- list()
+  if (is.null(opts$style)) opts$style <- default_axis_label_style()
+  opts
+}
 
 #' Validate that all referenced columns exist in `data`.
 #' @noRd
