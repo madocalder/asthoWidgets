@@ -4,16 +4,20 @@
 # purely so each `add_*_chart()` function reads as a thin wrapper around
 # the highcharter calls and the option-list defaults.
 
-#' Return \code{x} when it is a non-empty string, else \code{NULL}.
+#' Return \code{x} when it is a non-empty string, else \code{""}.
 #'
-#' Highcharts treats \code{title.text = ""} as "render the default Chart
-#' title placeholder"; only \code{NULL} truly hides the title. This
-#' helper lets callers pass \code{title: ""} in YAML to mean "no title".
+#' Highcharts shows its built-in \code{Chart title} placeholder whenever
+#' \code{title.text} is missing from the options blob. Passing
+#' \code{NULL} from R causes \code{highcharter::hc_title()} to drop the
+#' field via \code{modifyList}, which triggers exactly that placeholder.
+#' Passing the empty string instead serialises as \code{{"text": ""}}
+#' and renders no title text. Callers can therefore use \code{title: ""}
+#' in YAML to mean "no title".
 #' @noRd
 nz_or_null <- function(x) {
-  if (is.null(x)) return(NULL)
+  if (is.null(x)) return("")
   if (length(x) != 1) return(x)
-  if (!nzchar(x)) NULL else x
+  if (!nzchar(x)) "" else x
 }
 
 #' Default font/colour applied to axis labels.

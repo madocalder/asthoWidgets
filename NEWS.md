@@ -1,3 +1,14 @@
+# asthoWidgets 0.0.10
+
+* Fix: Empty/blank title and subtitle strings now actually suppress the
+  Highcharts `Chart title` placeholder.
+
+# asthoWidgets 0.0.9
+
+* `add_column_chart()` now accepts `column_options$colorByPoint` so a
+  single-series column / bar chart can cycle through the theme palette,
+  giving each bar its own colour.
+
 # asthoWidgets 0.0.8
 
 * Add `add_bubble_chart()` for bubble-series charts (single-series or

@@ -17,6 +17,9 @@
 #' @param   column_options   Optional. Recognised entries: \code{inverted}
 #'   (default \code{FALSE}; renders horizontal bars), \code{stacking}
 #'   (\code{"normal"}, \code{"percent"}, or \code{NULL}), \code{pointWidth},
+#'   \code{colorByPoint} (default \code{FALSE}; when \code{TRUE} a
+#'   single-series chart cycles through the theme palette so each bar
+#'   gets a different colour - ignored when \code{group_col} is set),
 #'   \code{dataLabels} (full Highcharts dataLabels list).
 #' @param   xAxis_options   Optional: \code{title}, \code{categories}.
 #'   \code{categories} defaults to \code{unique(data[[x_col]])}.
@@ -120,7 +123,8 @@ add_column_chart <- function(hc,
     hc |> highcharter::hc_add_series(
       type = "column",
       name = legend_options$titleText %||% y_col,
-      data = build_point_data(data, x_col, y_col)
+      data = build_point_data(data, x_col, y_col),
+      colorByPoint = column_options$colorByPoint %||% FALSE
     )
   }
 }
