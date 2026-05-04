@@ -69,12 +69,12 @@ add_pie_chart <- function(hc,
   hc |>
     highcharter::hc_chart(crop = FALSE) |>
     highcharter::hc_title(
-      text = title_options$title,
+      text = nz_or_null(title_options$title),
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
     highcharter::hc_subtitle(
-      text = subtitle_options$subtitle,
+      text = nz_or_null(subtitle_options$subtitle),
       useHTML = subtitle_options$useHTML %||% TRUE,
       verticalAlign = subtitle_options$verticalAlign %||% "bottom",
       y = subtitle_options$y %||% 30,
@@ -201,12 +201,12 @@ add_column_chart <- function(hc,
       inverted = column_options$inverted %||% FALSE
     ) |>
     highcharter::hc_title(
-      text = title_options$title,
+      text = nz_or_null(title_options$title),
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
     highcharter::hc_subtitle(
-      text = subtitle_options$subtitle,
+      text = nz_or_null(subtitle_options$subtitle),
       useHTML = subtitle_options$useHTML %||% TRUE,
       verticalAlign = subtitle_options$verticalAlign %||% "bottom",
       y = subtitle_options$y %||% 30,
@@ -305,12 +305,12 @@ add_line_chart <- function(hc,
 
   hc <- hc |>
     highcharter::hc_title(
-      text = title_options$title,
+      text = nz_or_null(title_options$title),
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
     highcharter::hc_subtitle(
-      text = subtitle_options$subtitle,
+      text = nz_or_null(subtitle_options$subtitle),
       useHTML = subtitle_options$useHTML %||% TRUE,
       verticalAlign = subtitle_options$verticalAlign %||% "bottom",
       y = subtitle_options$y %||% 30,
@@ -403,12 +403,12 @@ add_word_cloud <- function(hc,
 
   hc |>
     highcharter::hc_title(
-      text = title_options$title,
+      text = nz_or_null(title_options$title),
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
     highcharter::hc_subtitle(
-      text = subtitle_options$subtitle,
+      text = nz_or_null(subtitle_options$subtitle),
       useHTML = subtitle_options$useHTML %||% TRUE,
       verticalAlign = subtitle_options$verticalAlign %||% "bottom",
       y = subtitle_options$y %||% 30,
@@ -434,6 +434,18 @@ add_word_cloud <- function(hc,
 }
 
 # Internal helpers ------------------------------------------------------------
+
+#' Return \code{x} when it is a non-empty string, else \code{NULL}.
+#'
+#' Highcharts treats \code{title.text = ""} as "render the default Chart
+#' title placeholder"; only \code{NULL} truly hides the title. This
+#' helper lets callers pass \code{title: ""} in YAML to mean "no title".
+#' @noRd
+nz_or_null <- function(x) {
+  if (is.null(x)) return(NULL)
+  if (length(x) != 1) return(x)
+  if (!nzchar(x)) NULL else x
+}
 
 #' Default font/colour applied to axis labels.
 #'

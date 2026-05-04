@@ -1,3 +1,9 @@
+# asthoWidgets 0.0.7
+
+* Fix: Empty title strings (e.g. `title: ""` in YAML) no longer render
+  the Highcharts default `Chart title` placeholder. All chart helpers
+  treat empty/blank title and subtitle text as "no title".
+
 # asthoWidgets 0.0.6
 
 * Fix: Axis lable settings not being sent correctly.
