@@ -1,3 +1,9 @@
+# asthoWidgets 0.0.8
+
+* Add `add_bubble_chart()` for bubble-series charts (single-series or
+  grouped).
+* Refactor `chart.R` into into individual files. 
+
 # asthoWidgets 0.0.7
 
 * Fix: Empty title strings (e.g. `title: ""` in YAML) no longer render
