@@ -1,3 +1,7 @@
+## asthoWidgets (development version)
+
+* New `add_dumbbell_chart()` for low/high paired dumbbell charts.
+
 # asthoWidgets 0.0.10
 
 * Fix: Empty/blank title and subtitle strings now actually suppress the
