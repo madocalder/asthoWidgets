@@ -33,10 +33,14 @@ dataviz_colors <- list(
 #' @export
 dataviz_palettes <- list(
   gov_blues_3       = with(dataviz_colors, c(light_accent, light_blue, main_blue)),
-  gov_color_5       = with(dataviz_colors, c(light_blue, main_orange, main_blue, icon_accent, main_yellow)),
+  gov_color_5       = with(
+    dataviz_colors, c(light_blue, main_orange, main_blue, icon_accent, main_yellow)
+  ),
   gov_oranges_4     = with(dataviz_colors, c(light_yellow, main_yellow, main_orange, dark_orange)),
   gov_qualitative_3 = with(dataviz_colors, c(na_color, main_orange, icon_accent)),
-  main              = with(dataviz_colors, c(light_blue, main_orange, main_yellow, icon_accent, main_blue))
+  main              = with(
+    dataviz_colors, c(light_blue, main_orange, main_yellow, icon_accent, main_blue)
+  )
 )
 
 #' ASTHO Highcharter theme

@@ -21,8 +21,8 @@ add_line_chart <- function(hc,
                            y_col,
                            group_col = NULL,
                            line_options = list(),
-                           xAxis_options = list(),
-                           yAxis_options = list(),
+                           xAxis_options = list(), # nolint: object_name_linter
+                           yAxis_options = list(), # nolint: object_name_linter
                            title_options = list(),
                            subtitle_options = list(),
                            tooltip_options = list(),
