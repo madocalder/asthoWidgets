@@ -1,3 +1,5 @@
+# nolint start: line_length_linter
+
 #' Add a bubble series to a base chart
 #'
 #' Each row becomes one bubble. \code{x_col} and \code{y_col} position
@@ -19,11 +21,13 @@
 #' @param   bubble_options   Optional. Recognised entries: \code{minSize}
 #'   (default \code{"15"}), \code{maxSize} (default \code{"60"}),
 #'   \code{dataLabels} (full Highcharts dataLabels list).
-#' @param   xAxis_options,yAxis_options,title_options,subtitle_options,
-#'   tooltip_options,legend_options,caption_options   Same shape as
-#'   \code{add_column_chart()}.
+#' @param   xAxis_options,yAxis_options,title_options,subtitle_options,tooltip_options,legend_options,caption_options
+#'   Same shape as \code{add_column_chart()}.
 #' @return   A \code{highchart} object.
 #' @export
+
+# nolint end
+
 add_bubble_chart <- function(hc,
                              data,
                              x_col,

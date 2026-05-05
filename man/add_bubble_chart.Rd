@@ -41,8 +41,7 @@ is rendered per unique value.}
 (default \code{"15"}), \code{maxSize} (default \code{"60"}),
 \code{dataLabels} (full Highcharts dataLabels list).}
 
-\item{xAxis_options, yAxis_options, title_options, subtitle_options, }{tooltip_options,legend_options,caption_options   Same shape as
-\code{add_column_chart()}.}
+\item{xAxis_options, yAxis_options, title_options, subtitle_options, tooltip_options, legend_options, caption_options}{Same shape as \code{add_column_chart()}.}
 }
 \value{
 A \code{highchart} object.

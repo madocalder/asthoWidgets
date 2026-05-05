@@ -1,3 +1,5 @@
+# nolint start: line_length_linter
+
 #' Add a line series to a base chart
 #'
 #' Handles single-series and multi-series trend lines. When \code{group_col}
@@ -10,11 +12,13 @@
 #'   is optional.
 #' @param   line_options   Optional: \code{lineWidth} (default \code{4}),
 #'   \code{markerEnabled} (default \code{FALSE}), \code{dataLabels}.
-#' @param   xAxis_options,yAxis_options,title_options,subtitle_options,
-#'   tooltip_options,legend_options,caption_options   Same shape as
-#'   \code{add_column_chart()}.
+#' @param   xAxis_options,yAxis_options,title_options,subtitle_options,tooltip_options,legend_options,caption_options
+#'   Same shape as \code{add_column_chart()}.
 #' @return   A \code{highchart} object.
 #' @export
+
+# nolint end
+
 add_line_chart <- function(hc,
                            data,
                            x_col,
