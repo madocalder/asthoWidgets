@@ -1,6 +1,15 @@
-## asthoWidgets (development version)
+# asthoWidgets 0.1.0
 
-* New `add_dumbbell_chart()` for low/high paired dumbbell charts.
+* Add `add_dumbbell_chart()` for horizontal dumbbell charts (low / high pairs
+  per category, with optional grouping).
+* Add `add_sankey_chart()` for Sankey flow diagrams.
+* Add `aw_reactable()`, a themed wrapper around `reactable::reactable()`
+  with ASTHO header styling, Jost font, zebra striping, and a search field.
+* Add `aw_kpi_card()` and `aw_kpi_grid()` for headline-number cards arranged
+  in a responsive grid.
+* Add `aw_definition_popover()` plus a companion script helper so chart
+  titles, selectors, and other inline labels can carry a hover-triggered
+  definition popover backed by Bootstrap.
 
 # asthoWidgets 0.0.10
 
@@ -17,7 +26,7 @@
 
 * Add `add_bubble_chart()` for bubble-series charts (single-series or
   grouped).
-* Refactor `chart.R` into into individual files. 
+* Refactor `chart.R` into into individual files.
 
 # asthoWidgets 0.0.7
 
@@ -43,7 +52,7 @@
 # asthoWidgets 0.0.3
 
 * Move dataviz theme fromt he app into the package: exports `dataviz_colors`,
-  `dataviz_palettes`, and `get_astho_hc_theme()`. Widgets now ship a 
+  `dataviz_palettes`, and `get_astho_hc_theme()`. Widgets now ship a
    self-contained Highcharter theme.
 
 # asthoWidgets 0.0.2

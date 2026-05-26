@@ -26,27 +26,55 @@ add_dumbbell_chart(
 \code{create_base_chart(type = "dumbbell")}.}
 
 \item{data}{A data.frame with at least \code{x_col}, \code{low_col},
-and \code{high_col}; include \code{group_col} for grouped layouts.}
+and \code{high_col}.}
 
-\item{x_col}{Column name (string) for the dumbbell category.}
+\item{x_col}{Column name (string) for the category.}
 
-\item{low_col}{Column name for the low endpoint.}
+\item{low_col}{Column name (string) for the low value of each dumbbell.}
 
-\item{high_col}{Column name for the high endpoint.}
+\item{high_col}{Column name (string) for the high value of each dumbbell.}
 
 \item{group_col}{Optional column name. When supplied, data is split
-into one series per unique value.}
+into one Highcharts series per unique value.}
 
-\item{dumbbell_options}{Optional. Recognised: \code{markerRadius}
-(default 6), \code{connectorWidth} (default 3).}
+\item{dumbbell_options}{Optional. Recognised entries:
+\code{lowColor} (default \code{"#005182"} - ASTHO main blue),
+\code{color} (default \code{"#C65227"} - ASTHO orange; used for the
+connector line and the high marker), \code{connectorWidth} (default
+\code{2}), \code{markerRadius} (default \code{7}).}
 
-\item{xAxis_options, yAxis_options, title_options, subtitle_options, tooltip_options, legend_options, caption_options}{Same shape as \code{add_column_chart()}.}
+\item{xAxis_options}{Optional: \code{title}, \code{labels}. Note
+that because the chart is inverted, this is the visible vertical
+axis (categories).}
+
+\item{yAxis_options}{Optional: \code{title}, \code{min}, \code{max},
+\code{labels}. Visible horizontal axis (values).}
+
+\item{title_options}{Essential: \code{title}.}
+
+\item{subtitle_options}{Optional: \code{subtitle}.}
+
+\item{tooltip_options}{Optional: \code{pointFormat} (default uses
+\code{{point.low}} and \code{{point.high}}), \code{headerFormat},
+\code{useHTML}, \code{shared}.}
+
+\item{legend_options}{Optional: \code{enabled} (default depends on
+whether \code{group_col} is set).}
+
+\item{caption_options}{Optional: \code{text}, \code{useHTML},
+\code{margin}.}
 }
 \value{
 A \code{highchart} object.
 }
 \description{
-Each row of \code{data} becomes one dumbbell. \code{low_col} is the lower endpoint,
-\code{high_col} the upper. Supplying \code{group_col} produces one Highcharts series
-per unique value (each rendered with its own colour from the theme palette).
+Renders a horizontal dumbbell where each category has a connector
+between a low and a high value. Categories appear on the y-axis,
+values on the x-axis. The chart is automatically inverted so the
+caller does not have to think about axis orientation.
+}
+\details{
+Each point exposes \code{point.low} and \code{point.high} for use in
+tooltip templates, plus any other column from \code{data} via
+\code{point.<column>}.
 }
