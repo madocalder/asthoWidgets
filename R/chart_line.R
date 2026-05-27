@@ -89,6 +89,8 @@ add_line_chart <- function(hc,
       title = list(text = legend_options$titleText %||% NULL)
     )
 
+  hc <- add_grow_for_legend_hook(hc)
+
   if (has_groups) {
     series_list <- build_grouped_series(data, x_col, y_col, group_col, "line")
     hc |> highcharter::hc_add_series_list(series_list)

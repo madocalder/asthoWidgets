@@ -110,6 +110,7 @@ add_data_layers_to_map <- function(
         text = legend_options$titleText %||% "Category"
       )
     ) |>
+    add_grow_for_legend_hook() |>
     highcharter::hc_add_series(
       data = map_data,
       borderColor = data_series_options$borderColor %||% "#020202",

@@ -101,3 +101,49 @@ build_grouped_series <- function(data, x_col, y_col, group_col, type) {
 #' sensible default.
 #' @noRd
 `%||%` <- function(a, b) if (is.null(a)) b else a
+
+#' Attach a chart-load handler that grows the chart container only when
+#' a long legend genuinely exceeds its visual budget.
+#'
+#' The hook compares the legend's actual rendered height against 15% of
+#' the originally allocated chart height. If the legend is over budget,
+#' the parent DOM node's \code{style.height} is bumped by the excess
+#' and Highcharts is told to \code{setSize} so the redraw fills the new
+#' space. Charts with short legends (or none at all) are left at the
+#' size the caller requested - this fixes the previous behaviour where
+#' every chart grew to fit a fictional 85% plot-area target even when
+#' there was no legend pressure.
+#'
+#' Calls \code{highcharter::hc_chart()} which merges into existing
+#' chart options - safe to call alongside earlier \code{hc_chart()}
+#' invocations in the same pipe.
+#' @noRd
+add_grow_for_legend_hook <- function(hc) {
+  highcharter::hc_chart(
+    hc,
+    events = list(
+      load = htmlwidgets::JS(
+        "function() {",
+        "  var chart = this;",
+        "  if (chart._sizedForLegend) return;",
+        "  if (typeof chart._origChartHeight === 'undefined') {",
+        "    chart._origChartHeight = chart.chartHeight;",
+        "  }",
+        "  var legend = chart.legend;",
+        "  var legendGroup = legend && legend.group;",
+        "  if (!legendGroup) return;",
+        "  var legendH = legendGroup.getBBox().height;",
+        "  if (!legendH) return;",
+        "  var budget = Math.floor(chart._origChartHeight * 0.15);",
+        "  if (legendH <= budget) return;",
+        "  var overflow = legendH - budget;",
+        "  var newHeight = chart._origChartHeight + overflow;",
+        "  chart._sizedForLegend = true;",
+        "  var parent = chart.container && chart.container.parentNode;",
+        "  if (parent) { parent.style.height = newHeight + 'px'; }",
+        "  chart.setSize(undefined, newHeight, false);",
+        "}"
+      )
+    )
+  )
+}
