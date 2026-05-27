@@ -3,6 +3,7 @@
 export(add_bubble_chart)
 export(add_column_chart)
 export(add_data_layers_to_map)
+export(add_dumbbell_chart)
 export(add_line_chart)
 export(add_pie_chart)
 export(add_word_cloud)
