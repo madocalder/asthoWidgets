@@ -55,7 +55,7 @@ add_line_chart <- function(hc,
     ) |>
     highcharter::hc_xAxis(
       type = "category",
-      categories = xAxis_options$categories %||% unique(as.character(data[[x_col]])),
+      categories = as.list(xAxis_options$categories %||% unique(as.character(data[[x_col]]))),
       title = list(text = xAxis_options$title %||% NULL),
       labels = labels_with_style(xAxis_options$labels)
     ) |>

@@ -1,3 +1,8 @@
+# asthoWidgets 0.1.1
+
+* fix: single-category line and column charts no longer render one tick
+  per character of the category name.
+
 # asthoWidgets 0.1.0
 
 * Add `add_dumbbell_chart()` for horizontal dumbbell charts (low / high pairs
