@@ -1,3 +1,8 @@
+# asthoWidgets 0.1.2
+
+* fix: line charts now show point markers by default, so single-point series
+  render instead of disappearing.
+
 # asthoWidgets 0.1.1
 
 * fix: single-category line and column charts no longer render one tick
