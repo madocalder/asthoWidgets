@@ -1,3 +1,16 @@
+# asthoWidgets 0.2.0
+
+* feat: maps fill the width of their container. `add_data_layers_to_map()`
+  sizes the plot from the measured container width and keeps the full legend
+  beneath it, growing the chart for a tall legend rather than shrinking the
+  map. It tracks viewport and layout changes and re-fits when revealed from an
+  inactive tab.
+* feat: donuts grow with their legend. `add_pie_chart()` adds height per legend
+  item beyond a baseline, driven by the slice count so it stays reliable for
+  outputs drawn with `suspendWhenHidden = FALSE`. Tunable via the new
+  `size_options` argument (`perItem`, `baselineItems`, `maxHeight`,
+  `legendBump`, `fillWidth`).
+
 # asthoWidgets 0.1.2
 
 * fix: line charts now show point markers by default, so single-point series
