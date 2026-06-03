@@ -259,7 +259,6 @@ add_fill_width_hook <- function(hc,
 #' @param per_item Pixels added per item beyond the baseline.
 #' @param baseline_items Item count the caller's height already accommodates.
 #' @param max_height Pixel clamp for the grown height.
-#' @noRd
 add_legend_height_hook <- function(hc,
                                    n_items,
                                    per_item,
