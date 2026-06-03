@@ -15,7 +15,8 @@ add_pie_chart(
   subtitle_options = list(),
   tooltip_options = list(),
   legend_options = list(),
-  caption_options = list()
+  caption_options = list(),
+  size_options = list()
 )
 }
 \arguments{
@@ -52,6 +53,15 @@ a tooltip-only quantity such as a raw count).}
 
 \item{caption_options}{Optional: \code{text}, \code{useHTML},
 \code{margin}.}
+
+\item{size_options}{Optional sizing controls. By default the donut keeps
+its fixed height but grows by \code{perItem} (default 26) px for each
+legend item beyond \code{baselineItems} (default 3), so a long category
+list gets room beneath the pie; \code{maxHeight} (default 700) clamps it.
+This is driven by the slice count known in R, so it is reliable for pies
+drawn with \code{suspendWhenHidden = FALSE}. Set \code{legendBump = FALSE}
+for a flat fixed height, or \code{fillWidth = TRUE} to instead size the
+plot to the container width (only sensible for an always-visible donut).}
 }
 \value{
 A \code{highchart} object.

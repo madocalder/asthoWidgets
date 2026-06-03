@@ -38,6 +38,12 @@ create_base_map <- function(hc_thm, export_options = list()) {
 #' @param   tooltip_options Essential: 'pointFormat'. Optional: 'headerFormat', 'useHTML'.
 #' @param   legend_options Optional: 'reversed', 'enabled', 'layout', 'align', 'verticalAlign',
 #'   'itemMarginBottom', 'itemMarginTop', 'margin', 'titleText'.
+#' @param   size_options Optional sizing controls so the map fills the width of
+#'   its container. 'fillWidth' (default TRUE) sizes the plot to fill the
+#'   container width with the full legend preserved beneath it; set FALSE to
+#'   keep the caller's fixed height and only grow for legend overflow.
+#'   'minHeight' (default 380), 'maxHeight' (default 1500), 'fill' (default
+#'   0.9, the fraction of the width the map spans, leaving padding around it).
 #'
 #' @return   A highchart object.
 #' @export
@@ -52,7 +58,8 @@ add_data_layers_to_map <- function(
     subtitle_options = list(),
     caption_options = list(),
     tooltip_options = list(),
-    legend_options = list()) {
+    legend_options = list(),
+    size_options = list()) {
   # An attempt was made to replace this with highcharter::highchartProxy() and to use data-updating
   # The data-layers in the map were not updated via the proxy though
 
@@ -110,7 +117,7 @@ add_data_layers_to_map <- function(
         text = legend_options$titleText %||% "Category"
       )
     ) |>
-    add_grow_for_legend_hook() |>
+    apply_map_size_hook(size_options) |>
     highcharter::hc_add_series(
       data = map_data,
       borderColor = data_series_options$borderColor %||% "#020202",
@@ -122,4 +129,19 @@ add_data_layers_to_map <- function(
     )
 
   hc
+}
+
+#' Fill-width by default; fixed height (legend-overflow only) when fillWidth
+#' is FALSE. See the `size_options` param of [add_data_layers_to_map()].
+#' @noRd
+apply_map_size_hook <- function(hc, size_options = list()) {
+  if (isFALSE(size_options$fillWidth)) {
+    return(add_grow_for_legend_hook(hc))
+  }
+  add_fill_width_hook(
+    hc,
+    min_height = size_options$minHeight %||% 380,
+    max_height = size_options$maxHeight %||% 1500,
+    fill = size_options$fill %||% 0.9
+  )
 }

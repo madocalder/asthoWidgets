@@ -147,3 +147,159 @@ add_grow_for_legend_hook <- function(hc) {
     )
   )
 }
+
+#' Size a chart so its plot area fills the container width.
+#'
+#' Sets the chart height to \code{plotWidth * fill * (drawnHeight / drawnWidth)
+#' + chrome}, where chrome is the measured non-plot space. Measuring the legend
+#' rather than guessing keeps it visible whatever its size; a ResizeObserver
+#' re-fits on width changes.
+#'
+#' @param hc A highchart object.
+#' @param min_height,max_height Pixel clamp for the derived chart height.
+#' @param fill Fraction of the plot width the content should span (< 1 leaves
+#'   horizontal padding).
+#' @noRd
+add_fill_width_hook <- function(hc,
+                                min_height,
+                                max_height,
+                                fill = 1) {
+  cfg <- sprintf("var minH = %s, maxH = %s, fill = %s;", min_height, max_height, fill)
+  highcharter::hc_chart(
+    hc,
+    events = list(
+      load = htmlwidgets::JS(
+        "function() {",
+        "  var chart = this;",
+        "  if (!chart.container) return;",
+        paste0("  ", cfg),
+        # Resize every wrapper up to .html-widget-output, not just the inner
+        # node, or the outer wrapper keeps its fixed height and clips the chart.
+        "  var wrappers = [];",
+        "  (function() {",
+        "    var node = chart.container.parentNode, hops = 0;",
+        "    while (node && hops < 6) {",
+        "      wrappers.push(node);",
+        "      if (node.classList && node.classList.contains('html-widget-output')) break;",
+        "      node = node.parentNode; hops++;",
+        "    }",
+        "  })();",
+        "  var host = wrappers[wrappers.length - 1];",
+        "  if (!host) return;",
+        "  function setHeights(px) {",
+        "    wrappers.forEach(function(n) { n.style.height = px + 'px'; });",
+        "  }",
+        # Drawn map/pie bounds -> its natural aspect ratio.
+        "  function contentBox() {",
+        "    var W = 0, H = 0;",
+        "    (chart.series || []).forEach(function(s) {",
+        "      if (!s || s.visible === false || !s.group) return;",
+        "      try {",
+        "        var bb = s.group.getBBox();",
+        "        if (bb.width > W) { W = bb.width; }",
+        "        if (bb.height > H) { H = bb.height; }",
+        "      } catch (e) {}",
+        "    });",
+        "    return { w: W, h: H };",
+        "  }",
+        "  var retry = 0;",
+        "  function fit() {",
+        "    var w = host.offsetWidth;",
+        "    if (!w) return;",
+        "    if (Math.abs(w - chart.chartWidth) > 1) {",
+        "      chart.setSize(w, chart.chartHeight, false);",
+        "    }",
+        "    var plotW = chart.plotWidth;",
+        "    var box = contentBox();",
+        # Revealed from a hidden tab: width is set but getBBox is still 0.
+        # Retry next frame so a tab switch self-corrects without a resize.
+        "    if (!plotW || !box.w || !box.h) {",
+        "      if (retry < 10) { retry++; window.requestAnimationFrame(fit); }",
+        "      return;",
+        "    }",
+        "    retry = 0;",
+        "    var chrome = chart.chartHeight - chart.plotHeight;",
+        "    var target = Math.round(plotW * fill * (box.h / box.w) + chrome);",
+        "    if (target < minH) { target = minH; }",
+        "    if (target > maxH) { target = maxH; }",
+        "    if (Math.abs(target - chart.chartHeight) > 2) {",
+        "      setHeights(target);",
+        "      chart.setSize(w, target, false);",
+        "    } else {",
+        "      setHeights(chart.chartHeight);",
+        "    }",
+        "  }",
+        "  fit();",
+        "  if (window.ResizeObserver && !chart._awResizeObs) {",
+        "    chart._awLastWidth = host.offsetWidth;",
+        "    chart._awResizeObs = new ResizeObserver(function(entries) {",
+        "      var cw = entries[0].contentRect.width;",
+        "      if (Math.abs(cw - (chart._awLastWidth || 0)) < 1) return;",
+        "      chart._awLastWidth = cw;",
+        "      retry = 0;",
+        "      fit();",
+        "    });",
+        "    chart._awResizeObs.observe(host);",
+        "  }",
+        "}"
+      )
+    )
+  )
+}
+
+#' Grow a chart's height by its number of legend items.
+#'
+#' Adds \code{per_item} px for every item beyond \code{baseline_items} so a long
+#' bottom legend gets room instead of squeezing the plot. The count comes from R
+#' (not a render-time measurement), so it is reliable for outputs drawn with
+#' \code{suspendWhenHidden = FALSE}.
+#'
+#' @param hc A highchart object.
+#' @param n_items Number of legend items (slices).
+#' @param per_item Pixels added per item beyond the baseline.
+#' @param baseline_items Item count the caller's height already accommodates.
+#' @param max_height Pixel clamp for the grown height.
+add_legend_height_hook <- function(hc,
+                                   n_items,
+                                   per_item,
+                                   baseline_items,
+                                   max_height) {
+  extra <- max(0, n_items - baseline_items) * per_item
+  if (extra <= 0) {
+    return(hc)
+  }
+  cfg <- sprintf("var extra = %s, maxH = %s;", extra, max_height)
+  highcharter::hc_chart(
+    hc,
+    events = list(
+      load = htmlwidgets::JS(
+        "function() {",
+        "  var chart = this;",
+        "  if (!chart.container) return;",
+        paste0("  ", cfg),
+        # Collect wrappers up to the .html-widget-output element so all of
+        # them grow together and the outer container does not clip.
+        "  var wrappers = [], host = null, node = chart.container.parentNode, hops = 0;",
+        "  while (node && hops < 6) {",
+        "    wrappers.push(node);",
+        "    if (node.classList && node.classList.contains('html-widget-output')) {",
+        "      host = node; break;",
+        "    }",
+        "    node = node.parentNode; hops++;",
+        "  }",
+        "  if (!host) { host = wrappers[wrappers.length - 1]; }",
+        "  if (!host) return;",
+        # Base height from the inline style set by *Output(height=); reliable
+        # even while the tab is hidden (offsetHeight would be 0 there).
+        "  var base = parseInt(host.style.height, 10);",
+        "  if (!base || isNaN(base)) { base = chart.chartHeight || host.offsetHeight; }",
+        "  if (!base) return;",
+        "  var target = base + extra;",
+        "  if (target > maxH) { target = maxH; }",
+        "  wrappers.forEach(function(w) { w.style.height = target + 'px'; });",
+        "  chart.setSize(undefined, target, false);",
+        "}"
+      )
+    )
+  )
+}

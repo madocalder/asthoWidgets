@@ -14,7 +14,8 @@ add_data_layers_to_map(
   subtitle_options = list(),
   caption_options = list(),
   tooltip_options = list(),
-  legend_options = list()
+  legend_options = list(),
+  size_options = list()
 )
 }
 \arguments{
@@ -38,6 +39,13 @@ add_data_layers_to_map(
 
 \item{legend_options}{Optional: 'reversed', 'enabled', 'layout', 'align', 'verticalAlign',
 'itemMarginBottom', 'itemMarginTop', 'margin', 'titleText'.}
+
+\item{size_options}{Optional sizing controls so the map fills the width of
+its container. 'fillWidth' (default TRUE) sizes the plot to fill the
+container width with the full legend preserved beneath it; set FALSE to
+keep the caller's fixed height and only grow for legend overflow.
+'minHeight' (default 380), 'maxHeight' (default 1500), 'fill' (default
+0.9, the fraction of the width the map spans, leaving padding around it).}
 }
 \value{
 A highchart object.
