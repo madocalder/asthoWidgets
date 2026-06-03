@@ -44,7 +44,15 @@ aw_kpi_card <- function(value,
     ),
     htmltools::tags$div(
       class = "aw-kpi-header",
-      style = "display: flex; align-items: center; gap: 0.5rem; opacity: 0.85; font-size: 0.95rem; font-weight: 500;",
+      style =
+        paste(
+          "display: flex;",
+          "align-items: center;",
+          "gap: 0.5rem;",
+          "opacity: 0.85;",
+          "font-size: 0.95rem;",
+          "font-weight: 500;"
+        ),
       icon_tag,
       htmltools::tags$span(label)
     ),
