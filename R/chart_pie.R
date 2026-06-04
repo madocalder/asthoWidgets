@@ -51,6 +51,15 @@ add_pie_chart <- function(hc,
                           size_options = list()) {
   series_data <- pie_series_data(data, x_col, y_col, z_col)
 
+  # Colour each slice explicitly when the caller supplies `pie_options$colors`
+  # (aligned to the data order), so the donut can match a map's palette.
+  if (!is.null(pie_options$colors) && length(series_data) > 0) {
+    slice_colors <- rep_len(pie_options$colors, length(series_data))
+    for (i in seq_along(series_data)) {
+      series_data[[i]]$color <- slice_colors[[i]]
+    }
+  }
+
   hc |>
     highcharter::hc_chart(crop = FALSE) |>
     highcharter::hc_title(

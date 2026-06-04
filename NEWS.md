@@ -1,3 +1,9 @@
+# asthoWidgets 0.2.1
+
+* fix: `add_pie_chart()` now honours `pie_options$colors`, colouring each slice
+  explicitly (aligned to the data order) so a donut can match a map's palette.
+  Previously the option was ignored and slices fell back to the theme sequence.
+
 # asthoWidgets 0.2.0
 
 * feat: maps fill the width of their container. `add_data_layers_to_map()`
