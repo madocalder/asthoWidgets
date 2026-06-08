@@ -73,7 +73,7 @@ add_sankey_chart <- function(hc,
       nodeFormat = tooltip_options$nodeFormat %||%
         "{point.name}: <b>{point.sum:,.0f}</b>",
       pointFormat = tooltip_options$pointFormat %||%
-        "{point.fromNode.name} → {point.toNode.name}: <b>{point.weight:,.0f}</b>",
+        "{point.fromNode.name} \u2192 {point.toNode.name}: <b>{point.weight:,.0f}</b>",
       useHTML = tooltip_options$useHTML %||% TRUE
     ) |>
     highcharter::hc_legend(
