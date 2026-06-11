@@ -1,3 +1,7 @@
+# asthoWidgets 0.2.2
+
+* doc: document that `markerEnabled` defaults to `TRUE` in `add_line_chart()`.
+
 # asthoWidgets 0.2.1
 
 * fix: `add_pie_chart()` now honours `pie_options$colors`, colouring each slice
