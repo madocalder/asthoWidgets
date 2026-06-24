@@ -101,17 +101,17 @@ export_filename <- function(title) {
   if (nzchar(slug)) slug else NULL
 }
 
-#' Name the CSV/XLS export from the chart: title-based filename, the
-#' category column labelled with `x_col`, value columns keep series names.
+#' Name the CSV/XLS export: title-based filename, category column from
+#' `category_label`, value columns from series names.
 #' @noRd
-apply_export_naming <- function(hc, title, x_col) {
+apply_export_naming <- function(hc, title, category_label) {
   highcharter::hc_exporting(
     hc,
     filename = export_filename(title),
     csv = list(
       columnHeaderFormatter = highcharter::JS(sprintf(
         "function(item, key){ if (!item || item.coll === 'xAxis' || key === 'x' || key === 'name') { return %s; } return item.name ? item.name : false; }",
-        jsonlite::toJSON(x_col, auto_unbox = TRUE)
+        jsonlite::toJSON(category_label, auto_unbox = TRUE)
       ))
     )
   )

@@ -102,9 +102,9 @@ add_line_chart <- function(hc,
   } else {
     hc |> highcharter::hc_add_series(
       type = "line",
-      name = legend_options$titleText %||% y_col,
+      name = legend_options$titleText %||% yAxis_options$title %||% y_col,
       data = build_point_data(data, x_col, y_col)
     )
   }
-  apply_export_naming(hc, title_options$title, x_col)
+  apply_export_naming(hc, title_options$title, xAxis_options$title %||% x_col)
 }
