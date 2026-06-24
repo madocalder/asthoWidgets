@@ -93,6 +93,30 @@ build_grouped_series <- function(data, x_col, y_col, group_col, type) {
   })
 }
 
+#' Filename-safe slug from a chart title, or NULL when there's no title.
+#' @noRd
+export_filename <- function(title) {
+  if (is.null(title) || !nzchar(trimws(title))) return(NULL)
+  slug <- gsub("(^-+)|(-+$)", "", gsub("[^A-Za-z0-9]+", "-", trimws(title)))
+  if (nzchar(slug)) slug else NULL
+}
+
+#' Name the CSV/XLS export from the chart: title-based filename, the
+#' category column labelled with `x_col`, value columns keep series names.
+#' @noRd
+apply_export_naming <- function(hc, title, x_col) {
+  highcharter::hc_exporting(
+    hc,
+    filename = export_filename(title),
+    csv = list(
+      columnHeaderFormatter = highcharter::JS(sprintf(
+        "function(item, key){ if (!item || item.coll === 'xAxis' || key === 'x' || key === 'name') { return %s; } return item.name ? item.name : false; }",
+        jsonlite::toJSON(x_col, auto_unbox = TRUE)
+      ))
+    )
+  )
+}
+
 #' Line marker symbols: 5 built-ins + customs from aw-marker-symbols.js.
 #' @noRd
 line_marker_symbols <- function() {

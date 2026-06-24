@@ -95,9 +95,10 @@ add_line_chart <- function(hc,
   hc$x$hc_opts$symbols <- line_marker_symbols()
   hc <- attach_marker_symbols(hc)
 
-  if (has_groups) {
-    series_list <- build_grouped_series(data, x_col, y_col, group_col, "line")
-    hc |> highcharter::hc_add_series_list(series_list)
+  hc <- if (has_groups) {
+    hc |> highcharter::hc_add_series_list(
+      build_grouped_series(data, x_col, y_col, group_col, "line")
+    )
   } else {
     hc |> highcharter::hc_add_series(
       type = "line",
@@ -105,4 +106,5 @@ add_line_chart <- function(hc,
       data = build_point_data(data, x_col, y_col)
     )
   }
+  apply_export_naming(hc, title_options$title, x_col)
 }
