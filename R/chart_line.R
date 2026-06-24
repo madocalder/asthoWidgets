@@ -90,6 +90,9 @@ add_line_chart <- function(hc,
     )
 
   hc <- add_grow_for_legend_hook(hc)
+  # Highcharts reads the marker-symbol cycle from the root `symbols`, not chart.symbols
+  hc$x$hc_opts$symbols <- line_marker_symbols()
+  hc <- attach_marker_symbols(hc)
 
   if (has_groups) {
     series_list <- build_grouped_series(data, x_col, y_col, group_col, "line")

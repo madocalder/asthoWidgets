@@ -93,6 +93,26 @@ build_grouped_series <- function(data, x_col, y_col, group_col, type) {
   })
 }
 
+#' Line marker symbols: 5 built-ins + customs from aw-marker-symbols.js.
+#' @noRd
+line_marker_symbols <- function() {
+  c("circle", "diamond", "square", "triangle", "triangle-down",
+    "pentagon", "hexagon", "star")
+}
+
+#' Attach the custom marker-symbol script (see inst/js/aw-marker-symbols.js).
+#' @noRd
+attach_marker_symbols <- function(hc) {
+  dep <- htmltools::htmlDependency(
+    name = "aw-marker-symbols",
+    version = "0.1.0",
+    src = system.file("js", package = "asthoWidgets"),
+    script = "aw-marker-symbols.js"
+  )
+  hc$dependencies <- c(hc$dependencies, list(dep))
+  hc
+}
+
 #' Local null-coalescing infix.
 #'
 #' Defined once at package level (rather than per-source-file) so all
