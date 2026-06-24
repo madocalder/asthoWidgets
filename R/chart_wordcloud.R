@@ -39,7 +39,7 @@ add_word_cloud <- function(hc,
     highcharter::hc_subtitle(
       text = nz_or_null(subtitle_options$subtitle),
       useHTML = subtitle_options$useHTML %||% TRUE,
-      verticalAlign = subtitle_options$verticalAlign %||% "bottom",
+      verticalAlign = subtitle_options$verticalAlign %||% "top",
       y = subtitle_options$y %||% 30,
       x = subtitle_options$x %||% 0
     ) |>
