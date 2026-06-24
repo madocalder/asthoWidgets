@@ -69,7 +69,8 @@ add_line_chart <- function(hc,
       line = list(
         lineWidth = line_options$lineWidth %||% 4,
         marker = list(
-          enabled = line_options$markerEnabled %||% TRUE
+          enabled = line_options$markerEnabled %||% TRUE,
+          radius = line_options$markerRadius %||% 6
         ),
         dataLabels = line_options$dataLabels %||% list(enabled = FALSE)
       )
