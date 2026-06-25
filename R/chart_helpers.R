@@ -20,6 +20,38 @@ nz_or_null <- function(x) {
   if (!nzchar(x)) "" else x
 }
 
+#' Add a subtitle that sits below the title without overlapping it.
+#'
+#' Plain-text subtitles render as SVG, so Highcharts stacks them below the
+#' title height-aware: a 2-line title (narrow screens) no longer collides
+#' with the subtitle. HTML subtitles can't auto-stack, so they keep an
+#' explicit top placement. Callers can still override useHTML/verticalAlign/y.
+#' @noRd
+add_astho_subtitle <- function(hc, subtitle_options = list()) {
+  is_html <- subtitle_options$useHTML %||%
+    grepl("<", paste0(subtitle_options$subtitle, ""))
+  args <- list(
+    hc = hc,
+    text = nz_or_null(subtitle_options$subtitle),
+    useHTML = is_html,
+    x = subtitle_options$x %||% 0
+  )
+  if (is_html) {
+    # HTML subtitles can't take part in the auto-layout, so pin them.
+    args$verticalAlign <- subtitle_options$verticalAlign %||% "top"
+    args$y <- subtitle_options$y %||% 30
+  } else {
+    # Plain subtitles: only set verticalAlign/y if the caller asked. Omitting
+    # them lets Highcharts stack the subtitle below the title height-aware,
+    # so a 2-line title (narrow screens) does not overlap it.
+    if (!is.null(subtitle_options$verticalAlign)) {
+      args$verticalAlign <- subtitle_options$verticalAlign
+    }
+    if (!is.null(subtitle_options$y)) args$y <- subtitle_options$y
+  }
+  do.call(highcharter::hc_subtitle, args)
+}
+
 #' Default font/colour applied to axis labels.
 #'
 #' Highcharts replaces (rather than merges) the theme's
