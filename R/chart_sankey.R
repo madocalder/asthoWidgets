@@ -46,13 +46,7 @@ add_sankey_chart <- function(hc,
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    highcharter::hc_subtitle(
-      text = nz_or_null(subtitle_options$subtitle),
-      useHTML = subtitle_options$useHTML %||% TRUE,
-      verticalAlign = subtitle_options$verticalAlign %||% "bottom",
-      y = subtitle_options$y %||% 30,
-      x = subtitle_options$x %||% 0
-    ) |>
+    add_astho_subtitle(subtitle_options) |>
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,

@@ -1,3 +1,19 @@
+# asthoWidgets 0.3.0
+
+* feat: line charts cycle through eight distinct marker shapes, adding pentagon,
+  hexagon and star via `inst/js/aw-marker-symbols.js`, so a sixth series no
+  longer repeats the first marker (#66).
+* feat: chart downloads are named from the chart title, and CSV/XLSX column
+  headers come from the axis titles and series names instead of "Category" and
+  "Series 1" (#50).
+* fix: tooltips render outside the plot so they aren't clipped on narrow charts
+  (#49).
+* fix: line markers use radius 6 so they read at a consistent size (#65).
+* fix: chart subtitles sit under the title instead of under the caption,
+  matching the maps; plain subtitles now stack below the title height-aware,
+  via a shared `add_astho_subtitle()` helper, so a 2-line title on narrow
+  screens no longer overlaps them (#53).
+
 # asthoWidgets 0.2.2
 
 * doc: document that `markerEnabled` defaults to `TRUE` in `add_line_chart()`.

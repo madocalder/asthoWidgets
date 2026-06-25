@@ -63,13 +63,7 @@ add_column_chart <- function(hc,
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    highcharter::hc_subtitle(
-      text = nz_or_null(subtitle_options$subtitle),
-      useHTML = subtitle_options$useHTML %||% TRUE,
-      verticalAlign = subtitle_options$verticalAlign %||% "bottom",
-      y = subtitle_options$y %||% 30,
-      x = subtitle_options$x %||% 0
-    ) |>
+    add_astho_subtitle(subtitle_options) |>
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,
@@ -118,15 +112,17 @@ add_column_chart <- function(hc,
 
   hc <- add_grow_for_legend_hook(hc)
 
-  if (has_groups) {
-    series_list <- build_grouped_series(data, x_col, y_col, group_col, "column")
-    hc |> highcharter::hc_add_series_list(series_list)
+  hc <- if (has_groups) {
+    hc |> highcharter::hc_add_series_list(
+      build_grouped_series(data, x_col, y_col, group_col, "column")
+    )
   } else {
     hc |> highcharter::hc_add_series(
       type = "column",
-      name = legend_options$titleText %||% y_col,
+      name = legend_options$titleText %||% yAxis_options$title %||% y_col,
       data = build_point_data(data, x_col, y_col),
       colorByPoint = column_options$colorByPoint %||% FALSE
     )
   }
+  apply_export_naming(hc, title_options$title, xAxis_options$title %||% x_col)
 }
