@@ -33,8 +33,17 @@
 create_base_chart <- function(type,
                               hc_thm = get_astho_hc_theme(),
                               export_options = list()) {
+  # fill-drawn chart types take the app's pattern hook (see patterns.R).
+  # line/marker charts keep solid colours: their series differ by marker
+  # shape, and a pattern on a stroke reads as broken.
+  if (type %in% c("column", "bar", "pie", "bubble", "packedbubble", "sankey")) {
+    hc_thm$colors <- apply_pattern_colors(hc_thm$colors)
+  }
   highcharter::highchart() |>
     highcharter::hc_chart(type = type) |>
+    # pattern-fill colour support (see patterns.R); inert unless a pattern
+    # object is used as a colour
+    highcharter::hc_add_dependency("modules/pattern-fill.js") |>
     highcharter::hc_add_theme(hc_thm = hc_thm) |>
     viz_export(export_options)
 }
