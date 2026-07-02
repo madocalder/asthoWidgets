@@ -142,7 +142,12 @@ apply_export_naming <- function(hc, title, category_label) {
     filename = export_filename(title),
     csv = list(
       columnHeaderFormatter = highcharter::JS(sprintf(
-        "function(item, key){ if (!item || item.coll === 'xAxis' || key === 'x' || key === 'name') { return %s; } return item.name ? item.name : false; }",
+        paste0(
+          "function(item, key){ ",
+          "if (!item || item.coll === 'xAxis' || key === 'x' || key === 'name') ",
+          "{ return %s; } ",
+          "return item.name ? item.name : false; }"
+        ),
         jsonlite::toJSON(category_label, auto_unbox = TRUE)
       ))
     )
