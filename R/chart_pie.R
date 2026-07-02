@@ -53,6 +53,7 @@ add_pie_chart <- function(hc,
 
   # Colour each slice explicitly when the caller supplies `pie_options$colors`
   # (aligned to the data order), so the donut can match a map's palette.
+  pie_options$colors <- apply_pattern_colors(pie_options$colors)
   if (!is.null(pie_options$colors) && length(series_data) > 0) {
     slice_colors <- rep_len(pie_options$colors, length(series_data))
     for (i in seq_along(series_data)) {

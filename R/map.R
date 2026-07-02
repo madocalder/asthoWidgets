@@ -12,6 +12,9 @@ create_base_map <- function(hc_thm, export_options = list()) {
   highcharter::highchart(
     type = "map"
   ) |>
+    # pattern-fill colour support (see patterns.R); inert unless a pattern
+    # object is used as a colour
+    highcharter::hc_add_dependency("modules/pattern-fill.js") |>
     highcharter::hc_add_theme(
       hc_thm = hc_thm
     ) |>
@@ -86,8 +89,8 @@ add_data_layers_to_map <- function(
       dataClasses = color_options$dataClasses,
       dataClassColor = color_options$dataClassColor %||% "category"
     ) |>
-    highcharter::hc_colors(
-      colors = color_options$colors
+    set_chart_colors(
+      colors = apply_pattern_colors(color_options$colors)
     ) |>
     highcharter::hc_plotOptions(
       series = list(
