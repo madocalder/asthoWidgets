@@ -2,25 +2,45 @@
 #'
 #' Named hex values used across all asthoWidgets charts.
 #'
-#' \code{main_blue} (\code{#005182}) and \code{main_yellow} (\code{#EBB41F})
+#' \code{astho_blue} (\code{#005182}) and \code{yellow_ochre} (\code{#EBB41F})
 #' match the ASTHO bootstrap brand primary/warning colours; if those brand
 #' values change, update them here as well.
 #'
 #' @format A named list of hex colour strings.
 #' @export
 dataviz_colors <- list(
-  dark_accent  = "#242c3d",
-  dark_gray    = "#666",
-  dark_orange  = "#90361F",
-  icon_accent  = "#47BA83",
-  light_accent = "#cae6f2",
-  light_blue   = "#70C4E8",
-  light_yellow = "#FFD780",
-  main_blue    = "#005182",
-  main_orange  = "#C65227",
-  main_yellow  = "#EBB41F",
-  na_color     = "#E6E1E7"
+
+  astho_blue    = "#005182",
+  astho_orange  = "#C05711",
+  yellow_ochre  = "#EBB41F",
+  sky_blue      = "#56bde9",
+  teal_green    = "#35A584",
+  light_sage    = "#B6D094",
+  burnt_umber   = "#90361F",
+  pale_lilac    = "#E2CFEA",
+  dark_slate    = "#242c3d",
+  dark_gray     = "#666",
+  palest_blue   = "#cae6f2",
+  na_color      = "#E6E1E7"
 )
+
+
+
+# dataviz_colors <- list(
+#   dark_slate  = "#242c3d",
+#   dark_gray    = "#666",
+#   burnt_umber  = "#90361F",
+#   teal_green  = "#47BA83",
+#   palest_blue = "#cae6f2",
+#   sky_blue   = "#70C4E8",
+#   light_yellow = "#FFD780",
+#   astho_blue    = "#005182",
+#   astho_orange  = "#C65227",
+#   yellow_ochre  = "#EBB41F",
+#   na_color     = "#E6E1E7"
+# )
+
+
 
 #' ASTHO data-visualisation colour palettes
 #'
@@ -32,14 +52,19 @@ dataviz_colors <- list(
 #' @format A named list of character vectors of hex colour strings.
 #' @export
 dataviz_palettes <- list(
-  gov_blues_3       = with(dataviz_colors, c(light_accent, light_blue, main_blue)),
+
+  gov_blues_3       = with(dataviz_colors, c(palest_blue, sky_blue, astho_blue)),
+
   gov_color_5       = with(
-    dataviz_colors, c(light_blue, main_orange, main_blue, icon_accent, main_yellow)
+    dataviz_colors, c(sky_blue, astho_orange, astho_blue, teal_green, yellow_ochre)
   ),
-  gov_oranges_4     = with(dataviz_colors, c(light_yellow, main_yellow, main_orange, dark_orange)),
-  gov_qualitative_3 = with(dataviz_colors, c(na_color, main_orange, icon_accent)),
+
+  gov_oranges_4     = with(dataviz_colors, c(light_yellow, yellow_ochre, astho_orange, burnt_umber)),
+
+  gov_qualitative_3 = with(dataviz_colors, c(na_color, astho_orange, sky_blue)),
+
   main              = with(
-    dataviz_colors, c(light_blue, main_orange, main_yellow, icon_accent, main_blue)
+    dataviz_colors, c(astho_blue, astho_orange, sky_blue, light_sage, teal_green, yellow_ochre, burnt_umber, pale_lilac)
   )
 )
 
@@ -57,7 +82,7 @@ dataviz_palettes <- list(
 get_astho_hc_theme <- function() {
   defaults <- list(
     fontFamily = "Jost",
-    color = dataviz_colors$dark_accent
+    color = dataviz_colors$dark_slate
   )
 
   axis_theme <- list(
@@ -65,7 +90,7 @@ get_astho_hc_theme <- function() {
       style = c(
         defaults["fontFamily"],
         list(
-          color = dataviz_colors$dark_gray,
+          color = dataviz_colors$dark_slate,
           fontSize = "15px",
           fontWeight = "normal"
         )
@@ -151,7 +176,7 @@ get_astho_hc_theme <- function() {
     ),
     useHTML = TRUE,
     itemHoverStyle = list(
-      color = dataviz_colors$light_accent
+      color = dataviz_colors$palest_blue
     )
   )
 }
