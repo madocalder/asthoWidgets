@@ -10,6 +10,7 @@
 #' @export
 dataviz_colors <- list(
 
+  # Main colors
   astho_blue    = "#005182",
   astho_orange  = "#C05711",
   yellow_ochre  = "#EBB41F",
@@ -18,28 +19,17 @@ dataviz_colors <- list(
   light_sage    = "#B6D094",
   burnt_umber   = "#90361F",
   pale_lilac    = "#E2CFEA",
+
+  # Neutrals
+
   dark_slate    = "#242c3d",
-  dark_gray     = "#666",
-  palest_blue   = "#cae6f2",
-  na_color      = "#E6E1E7"
+  medium_slate  = "#636b7f",
+  na_color      = "#C4B8B2",
+
+  # Shades and tints
+  palest_blue   = "#CAE6F2",
+
 )
-
-
-
-# dataviz_colors <- list(
-#   dark_slate  = "#242c3d",
-#   dark_gray    = "#666",
-#   burnt_umber  = "#90361F",
-#   teal_green  = "#47BA83",
-#   palest_blue = "#cae6f2",
-#   sky_blue   = "#70C4E8",
-#   light_yellow = "#FFD780",
-#   astho_blue    = "#005182",
-#   astho_orange  = "#C65227",
-#   yellow_ochre  = "#EBB41F",
-#   na_color     = "#E6E1E7"
-# )
-
 
 
 #' ASTHO data-visualisation colour palettes
@@ -53,19 +43,32 @@ dataviz_colors <- list(
 #' @export
 dataviz_palettes <- list(
 
-  gov_blues_3       = with(dataviz_colors, c(palest_blue, sky_blue, astho_blue)),
+  # continuous ----
+  ## old name: gov_blues_3
+  blues_3    = with(dataviz_colors,
+                    c(palest_blue, sky_blue, astho_blue)),
 
-  gov_color_5       = with(
-    dataviz_colors, c(sky_blue, astho_orange, astho_blue, teal_green, yellow_ochre)
-  ),
+  ## old name: gov_oranges_4
+  warm_4     = with(dataviz_colors,
+                    c(light_sage, yellow_ochre, astho_orange, burnt_umber)),
 
-  gov_oranges_4     = with(dataviz_colors, c(light_yellow, yellow_ochre, astho_orange, burnt_umber)),
+  # categorical ----
+  ## old name: gov_qualitative_3
+  cat_3      = with(dataviz_colors,
+                    c(na_color, astho_orange, sky_blue)
+                    ),
 
-  gov_qualitative_3 = with(dataviz_colors, c(na_color, astho_orange, sky_blue)),
+  ## old name: gov_color_5
+  cat_5      = with(dataviz_colors,
+                    c(astho_blue, sky_blue, astho_orange, light_sage, teal_green)
+                    ),
 
-  main              = with(
-    dataviz_colors, c(astho_blue, astho_orange, sky_blue, light_sage, teal_green, yellow_ochre, burnt_umber, pale_lilac)
-  )
+
+  main       = with(dataviz_colors,
+                    c(astho_blue, sky_blue, astho_orange, light_sage, teal_green,
+                      yellow_ochre, pale_lilac, burnt_umber)
+                    )
+
 )
 
 #' ASTHO Highcharter theme
@@ -153,7 +156,7 @@ get_astho_hc_theme <- function() {
       style = c(
         defaults["fontFamily"],
         list(
-          color = dataviz_colors$dark_gray,
+          color = dataviz_colors$medium_slate,
           fontSize = "13px"
         )
       )
