@@ -1,12 +1,12 @@
-#' ASTHO data-visualisation colour palette
+#' ASTHO data-visualisation color palette
 #'
 #' Named hex values used across all asthoWidgets charts.
 #'
 #' \code{astho_blue} (\code{#005182}) and \code{yellow_ochre} (\code{#EBB41F})
-#' match the ASTHO bootstrap brand primary/warning colours; if those brand
+#' match the ASTHO bootstrap brand primary/warning colors; if those brand
 #' values change, update them here as well.
 #'
-#' @format A named list of hex colour strings.
+#' @format A named list of hex color strings.
 #' @export
 dataviz_colors <- list(
 
@@ -27,19 +27,19 @@ dataviz_colors <- list(
   na_color      = "#C4B8B2",
 
   # Shades and tints
-  palest_blue   = "#CAE6F2",
+  palest_blue   = "#CAE6F2"
 
 )
 
 
-#' ASTHO data-visualisation colour palettes
+#' ASTHO data-visualisation color palettes
 #'
-#' Named character vectors of hex colours derived from \code{dataviz_colors},
+#' Named character vectors of hex colors derived from \code{dataviz_colors},
 #' suitable for passing to \code{highcharter::hc_colors()} or as the
 #' \code{colors} entry in the \code{color_options} list accepted by
 #' \code{add_data_layers_to_map()}.
 #'
-#' @format A named list of character vectors of hex colour strings.
+#' @format A named list of character vectors of hex color strings.
 #' @export
 dataviz_palettes <- list(
 
@@ -74,7 +74,7 @@ dataviz_palettes <- list(
 #' ASTHO Highcharter theme
 #'
 #' Returns a \code{highcharter::hc_theme()} object configured with the ASTHO
-#' brand fonts and colours from \code{dataviz_colors} and
+#' brand fonts and colors from \code{dataviz_colors} and
 #' \code{dataviz_palettes}. Pass the returned theme to
 #' \code{create_base_map()} (or \code{highcharter::hc_add_theme()} for charts
 #' built outside the helpers in this package) so every chart in the app

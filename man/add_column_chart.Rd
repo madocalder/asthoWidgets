@@ -40,7 +40,7 @@ into one Highcharts series per unique value.}
 (\code{"normal"}, \code{"percent"}, or \code{NULL}), \code{pointWidth},
 \code{colorByPoint} (default \code{FALSE}; when \code{TRUE} a
 single-series chart cycles through the theme palette so each bar
-gets a different colour - ignored when \code{group_col} is set),
+gets a different color - ignored when \code{group_col} is set),
 \code{dataLabels} (full Highcharts dataLabels list).}
 
 \item{xAxis_options}{Optional: \code{title}, \code{categories}.
@@ -72,5 +72,5 @@ A \code{highchart} object.
 Handles single-series, multi-series grouped, stacked, and horizontal
 (\code{column_options$inverted = TRUE}, which is what Highcharts calls a
 bar chart) variants. When \code{group_col} is supplied, one series is
-rendered per unique value, coloured from the chart's theme palette.
+rendered per unique value, colored from the chart's theme palette.
 }

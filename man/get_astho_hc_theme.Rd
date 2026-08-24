@@ -11,7 +11,7 @@ A \code{hc_theme} object.
 }
 \description{
 Returns a \code{highcharter::hc_theme()} object configured with the ASTHO
-brand fonts and colours from \code{dataviz_colors} and
+brand fonts and colors from \code{dataviz_colors} and
 \code{dataviz_palettes}. Pass the returned theme to
 \code{create_base_map()} (or \code{highcharter::hc_add_theme()} for charts
 built outside the helpers in this package) so every chart in the app

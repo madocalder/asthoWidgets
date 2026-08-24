@@ -20,7 +20,7 @@ nz_or_null <- function(x) {
   if (!nzchar(x)) "" else x
 }
 
-#' Default font/colour applied to axis labels.
+#' Default font/color applied to axis labels.
 #'
 #' Highcharts replaces (rather than merges) the theme's
 #' \code{xAxis$labels$style} block when a chart specifies its own
