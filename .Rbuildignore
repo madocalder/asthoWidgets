@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^asthoWidgets\.Rproj$
 ^\.Rproj\.user$
 ^\.github$

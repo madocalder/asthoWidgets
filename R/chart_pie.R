@@ -53,6 +53,7 @@ add_pie_chart <- function(hc,
 
   # Color each slice explicitly when the caller supplies `pie_options$colors`
   # (aligned to the data order), so the donut can match a map's palette.
+  pie_options$colors <- apply_pattern_colors(pie_options$colors)
   if (!is.null(pie_options$colors) && length(series_data) > 0) {
     slice_colors <- rep_len(pie_options$colors, length(series_data))
     for (i in seq_along(series_data)) {
@@ -67,13 +68,7 @@ add_pie_chart <- function(hc,
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    highcharter::hc_subtitle(
-      text = nz_or_null(subtitle_options$subtitle),
-      useHTML = subtitle_options$useHTML %||% TRUE,
-      verticalAlign = subtitle_options$verticalAlign %||% "bottom",
-      y = subtitle_options$y %||% 30,
-      x = subtitle_options$x %||% 0
-    ) |>
+    add_astho_subtitle(subtitle_options) |>
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,

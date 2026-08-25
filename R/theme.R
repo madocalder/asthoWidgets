@@ -166,6 +166,8 @@ get_astho_hc_theme <- function() {
     yAxis = axis_theme,
     legend = legend_theme,
     tooltip = list(
+      # render outside the plot so narrow charts don't clip it
+      outside = TRUE,
       padding = 10,
       borderRadius = 20,
       backgroundColor = "#fff",

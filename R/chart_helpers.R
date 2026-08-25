@@ -20,7 +20,39 @@ nz_or_null <- function(x) {
   if (!nzchar(x)) "" else x
 }
 
-#' Default font/color applied to axis labels.
+#' Add a subtitle that sits below the title without overlapping it.
+#'
+#' Plain-text subtitles render as SVG, so Highcharts stacks them below the
+#' title height-aware: a 2-line title (narrow screens) no longer collides
+#' with the subtitle. HTML subtitles can't auto-stack, so they keep an
+#' explicit top placement. Callers can still override useHTML/verticalAlign/y.
+#' @noRd
+add_astho_subtitle <- function(hc, subtitle_options = list()) {
+  is_html <- subtitle_options$useHTML %||%
+    grepl("<", paste0(subtitle_options$subtitle, ""))
+  args <- list(
+    hc = hc,
+    text = nz_or_null(subtitle_options$subtitle),
+    useHTML = is_html,
+    x = subtitle_options$x %||% 0
+  )
+  if (is_html) {
+    # HTML subtitles can't take part in the auto-layout, so pin them.
+    args$verticalAlign <- subtitle_options$verticalAlign %||% "top"
+    args$y <- subtitle_options$y %||% 30
+  } else {
+    # Plain subtitles: only set verticalAlign/y if the caller asked. Omitting
+    # them lets Highcharts stack the subtitle below the title height-aware,
+    # so a 2-line title (narrow screens) does not overlap it.
+    if (!is.null(subtitle_options$verticalAlign)) {
+      args$verticalAlign <- subtitle_options$verticalAlign
+    }
+    if (!is.null(subtitle_options$y)) args$y <- subtitle_options$y
+  }
+  do.call(highcharter::hc_subtitle, args)
+}
+
+#' Default font/colour applied to axis labels.
 #'
 #' Highcharts replaces (rather than merges) the theme's
 #' \code{xAxis$labels$style} block when a chart specifies its own
@@ -91,6 +123,55 @@ build_grouped_series <- function(data, x_col, y_col, group_col, type) {
       data = build_point_data(sub, x_col, y_col)
     )
   })
+}
+
+#' Filename-safe slug from a chart title, or NULL when there's no title.
+#' @noRd
+export_filename <- function(title) {
+  if (is.null(title) || !nzchar(trimws(title))) return(NULL)
+  slug <- gsub("(^-+)|(-+$)", "", gsub("[^A-Za-z0-9]+", "-", trimws(title)))
+  if (nzchar(slug)) slug else NULL
+}
+
+#' Name the CSV/XLS export: title-based filename, category column from
+#' `category_label`, value columns from series names.
+#' @noRd
+apply_export_naming <- function(hc, title, category_label) {
+  highcharter::hc_exporting(
+    hc,
+    filename = export_filename(title),
+    csv = list(
+      columnHeaderFormatter = highcharter::JS(sprintf(
+        paste0(
+          "function(item, key){ ",
+          "if (!item || item.coll === 'xAxis' || key === 'x' || key === 'name') ",
+          "{ return %s; } ",
+          "return item.name ? item.name : false; }"
+        ),
+        jsonlite::toJSON(category_label, auto_unbox = TRUE)
+      ))
+    )
+  )
+}
+
+#' Line marker symbols: 5 built-ins + customs from aw-marker-symbols.js.
+#' @noRd
+line_marker_symbols <- function() {
+  c("circle", "diamond", "square", "triangle", "triangle-down",
+    "pentagon", "hexagon", "star")
+}
+
+#' Attach the custom marker-symbol script (see inst/js/aw-marker-symbols.js).
+#' @noRd
+attach_marker_symbols <- function(hc) {
+  dep <- htmltools::htmlDependency(
+    name = "aw-marker-symbols",
+    version = "0.1.0",
+    src = system.file("js", package = "asthoWidgets"),
+    script = "aw-marker-symbols.js"
+  )
+  hc$dependencies <- c(hc$dependencies, list(dep))
+  hc
 }
 
 #' Local null-coalescing infix.
