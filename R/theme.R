@@ -1,52 +1,81 @@
-#' ASTHO data-visualisation colour palette
+#' ASTHO data-visualisation color palette
 #'
 #' Named hex values used across all asthoWidgets charts.
 #'
-#' \code{main_blue} (\code{#005182}) and \code{main_yellow} (\code{#EBB41F})
-#' match the ASTHO bootstrap brand primary/warning colours; if those brand
+#' \code{astho_blue} (\code{#005182}) and \code{yellow_ochre} (\code{#EBB41F})
+#' match the ASTHO bootstrap brand primary/warning colors; if those brand
 #' values change, update them here as well.
 #'
-#' @format A named list of hex colour strings.
+#' @format A named list of hex color strings.
 #' @export
 dataviz_colors <- list(
-  dark_accent  = "#242c3d",
-  dark_gray    = "#666",
-  dark_orange  = "#90361F",
-  icon_accent  = "#47BA83",
-  light_accent = "#cae6f2",
-  light_blue   = "#70C4E8",
-  light_yellow = "#FFD780",
-  main_blue    = "#005182",
-  main_orange  = "#C65227",
-  main_yellow  = "#EBB41F",
-  na_color     = "#E6E1E7"
+
+  # ASTHO brand colors
+  astho_blue    = "#005182",
+  astho_orange  = "#C05711",
+  sky_blue      = "#56bde9",
+  light_sage    = "#B6D094",
+  pale_lilac    = "#E2CFEA",
+
+  # Other main colors
+  yellow_ochre  = "#EBB41F",
+  teal_green    = "#35A584",
+  burnt_umber   = "#90361F",
+
+  # Neutrals
+  dark_slate    = "#242c3d",
+  medium_slate  = "#636b7f",
+  na_color      = "#C4B8B2",
+
+  # Shades and tints
+  palest_blue   = "#CAE6F2"
+
 )
 
-#' ASTHO data-visualisation colour palettes
+
+#' ASTHO data-visualisation color palettes
 #'
-#' Named character vectors of hex colours derived from \code{dataviz_colors},
+#' Named character vectors of hex colors derived from \code{dataviz_colors},
 #' suitable for passing to \code{highcharter::hc_colors()} or as the
 #' \code{colors} entry in the \code{color_options} list accepted by
 #' \code{add_data_layers_to_map()}.
 #'
-#' @format A named list of character vectors of hex colour strings.
+#' @format A named list of character vectors of hex color strings.
 #' @export
 dataviz_palettes <- list(
-  gov_blues_3       = with(dataviz_colors, c(light_accent, light_blue, main_blue)),
-  gov_color_5       = with(
-    dataviz_colors, c(light_blue, main_orange, main_blue, icon_accent, main_yellow)
-  ),
-  gov_oranges_4     = with(dataviz_colors, c(light_yellow, main_yellow, main_orange, dark_orange)),
-  gov_qualitative_3 = with(dataviz_colors, c(na_color, main_orange, icon_accent)),
-  main              = with(
-    dataviz_colors, c(light_blue, main_orange, main_yellow, icon_accent, main_blue)
-  )
+
+  # continuous ----
+  ## old name: gov_blues_3
+  blues_3    = with(dataviz_colors,
+                    c(palest_blue, sky_blue, astho_blue)),
+
+  ## old name: gov_oranges_4
+  warm_4     = with(dataviz_colors,
+                    c(light_sage, yellow_ochre, astho_orange, burnt_umber)),
+
+  # categorical ----
+  ## old name: gov_qualitative_3
+  cat_3      = with(dataviz_colors,
+                    c(na_color, astho_orange, sky_blue)
+                    ),
+
+  ## old name: gov_color_5
+  cat_5      = with(dataviz_colors,
+                    c(astho_blue, sky_blue, astho_orange, light_sage, teal_green)
+                    ),
+
+
+  main       = with(dataviz_colors,
+                    c(astho_blue, sky_blue, astho_orange, light_sage, teal_green,
+                      yellow_ochre, pale_lilac, burnt_umber)
+                    )
+
 )
 
 #' ASTHO Highcharter theme
 #'
 #' Returns a \code{highcharter::hc_theme()} object configured with the ASTHO
-#' brand fonts and colours from \code{dataviz_colors} and
+#' brand fonts and colors from \code{dataviz_colors} and
 #' \code{dataviz_palettes}. Pass the returned theme to
 #' \code{create_base_map()} (or \code{highcharter::hc_add_theme()} for charts
 #' built outside the helpers in this package) so every chart in the app
@@ -57,7 +86,7 @@ dataviz_palettes <- list(
 get_astho_hc_theme <- function() {
   defaults <- list(
     fontFamily = "Jost",
-    color = dataviz_colors$dark_accent
+    color = dataviz_colors$dark_slate
   )
 
   axis_theme <- list(
@@ -65,7 +94,7 @@ get_astho_hc_theme <- function() {
       style = c(
         defaults["fontFamily"],
         list(
-          color = dataviz_colors$dark_gray,
+          color = dataviz_colors$dark_slate,
           fontSize = "15px",
           fontWeight = "normal"
         )
@@ -128,7 +157,7 @@ get_astho_hc_theme <- function() {
       style = c(
         defaults["fontFamily"],
         list(
-          color = dataviz_colors$dark_gray,
+          color = dataviz_colors$medium_slate,
           fontSize = "13px"
         )
       )
@@ -153,7 +182,7 @@ get_astho_hc_theme <- function() {
     ),
     useHTML = TRUE,
     itemHoverStyle = list(
-      color = dataviz_colors$light_accent
+      color = dataviz_colors$palest_blue
     )
   )
 }

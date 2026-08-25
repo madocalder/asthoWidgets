@@ -2,9 +2,9 @@
 % Please edit documentation in R/theme.R
 \name{dataviz_colors}
 \alias{dataviz_colors}
-\title{ASTHO data-visualisation colour palette}
+\title{ASTHO data-visualisation color palette}
 \format{
-A named list of hex colour strings.
+A named list of hex color strings.
 }
 \usage{
 dataviz_colors
@@ -13,7 +13,7 @@ dataviz_colors
 Named hex values used across all asthoWidgets charts.
 }
 \details{
-\code{main_blue} (\code{#005182}) and \code{main_yellow} (\code{#EBB41F})
-match the ASTHO bootstrap brand primary/warning colours; if those brand
+\code{astho_blue} (\code{#005182}) and \code{yellow_ochre} (\code{#EBB41F})
+match the ASTHO bootstrap brand primary/warning colors; if those brand
 values change, update them here as well.
 }

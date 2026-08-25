@@ -32,7 +32,7 @@
 
 # asthoWidgets 0.2.1
 
-* fix: `add_pie_chart()` now honours `pie_options$colors`, colouring each slice
+* fix: `add_pie_chart()` now honours `pie_options$colors`, coloring each slice
   explicitly (aligned to the data order) so a donut can match a map's palette.
   Previously the option was ignored and slices fell back to the theme sequence.
 
@@ -81,7 +81,7 @@
 
 * `add_column_chart()` now accepts `column_options$colorByPoint` so a
   single-series column / bar chart can cycle through the theme palette,
-  giving each bar its own colour.
+  giving each bar its own color.
 
 # asthoWidgets 0.0.8
 
@@ -112,7 +112,7 @@
 
 # asthoWidgets 0.0.3
 
-* Move dataviz theme fromt he app into the package: exports `dataviz_colors`,
+* Move dataviz theme from the app into the package: exports `dataviz_colors`,
   `dataviz_palettes`, and `get_astho_hc_theme()`. Widgets now ship a
    self-contained Highcharter theme.
 
