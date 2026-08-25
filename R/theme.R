@@ -46,29 +46,37 @@ dataviz_palettes <- list(
 
   # continuous ----
   ## old name: gov_blues_3
-  blues_3    = with(dataviz_colors,
-                    c(palest_blue, sky_blue, astho_blue)),
+  blues_3 = with(
+    dataviz_colors,
+    c(palest_blue, sky_blue, astho_blue)
+  ),
 
   ## old name: gov_oranges_4
-  warm_4     = with(dataviz_colors,
-                    c(light_sage, yellow_ochre, astho_orange, burnt_umber)),
+  warm_4 = with(
+    dataviz_colors,
+    c(light_sage, yellow_ochre, astho_orange, burnt_umber)
+  ),
 
   # categorical ----
   ## old name: gov_qualitative_3
-  cat_3      = with(dataviz_colors,
-                    c(na_color, astho_orange, sky_blue)
-                    ),
+  cat_3 = with(
+    dataviz_colors,
+    c(na_color, astho_orange, sky_blue)
+  ),
 
   ## old name: gov_color_5
-  cat_5      = with(dataviz_colors,
-                    c(astho_blue, sky_blue, astho_orange, light_sage, teal_green)
-                    ),
+  cat_5 = with(
+    dataviz_colors,
+    c(astho_blue, sky_blue, astho_orange, light_sage, teal_green)
+  ),
 
-
-  main       = with(dataviz_colors,
-                    c(astho_blue, sky_blue, astho_orange, light_sage, teal_green,
-                      yellow_ochre, pale_lilac, burnt_umber)
-                    )
+  main = with(
+    dataviz_colors,
+    c(
+      astho_blue, sky_blue, astho_orange, light_sage, teal_green,
+      yellow_ochre, pale_lilac, burnt_umber
+    )
+  )
 
 )
 
