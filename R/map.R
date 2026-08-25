@@ -18,7 +18,7 @@ create_base_map <- function(hc_thm, export_options = list()) {
     highcharter::hc_add_theme(
       hc_thm = hc_thm
     ) |>
-    viz_export(
+    viz_export( # nolint: object_usage_linter
       export_options
     )
 }
@@ -52,17 +52,17 @@ create_base_map <- function(hc_thm, export_options = list()) {
 #' @export
 
 add_data_layers_to_map <- function(
-    hc,
-    map_data,
-    data_series_options = list(),
-    color_options = list(),
-    plot_options = list(),
-    title_options = list(),
-    subtitle_options = list(),
-    caption_options = list(),
-    tooltip_options = list(),
-    legend_options = list(),
-    size_options = list()) {
+  hc,
+  map_data,
+  data_series_options = list(),
+  color_options = list(),
+  plot_options = list(),
+  title_options = list(),
+  subtitle_options = list(),
+  caption_options = list(),
+  tooltip_options = list(),
+  legend_options = list(),
+  size_options = list()) {
   # An attempt was made to replace this with highcharter::highchartProxy() and to use data-updating
   # The data-layers in the map were not updated via the proxy though
 
@@ -89,8 +89,8 @@ add_data_layers_to_map <- function(
       dataClasses = color_options$dataClasses,
       dataClassColor = color_options$dataClassColor %||% "category"
     ) |>
-    set_chart_colors(
-      colors = apply_pattern_colors(color_options$colors)
+    set_chart_colors( # nolint: object_usage_linter
+      colors = apply_pattern_colors(color_options$colors) # nolint: object_usage_linter
     ) |>
     highcharter::hc_plotOptions(
       series = list(
@@ -139,9 +139,9 @@ add_data_layers_to_map <- function(
 #' @noRd
 apply_map_size_hook <- function(hc, size_options = list()) {
   if (isFALSE(size_options$fillWidth)) {
-    return(add_grow_for_legend_hook(hc))
+    return(add_grow_for_legend_hook(hc)) # nolint: object_usage_linter
   }
-  add_fill_width_hook(
+  add_fill_width_hook( # nolint: object_usage_linter
     hc,
     min_height = size_options$minHeight %||% 380,
     max_height = size_options$maxHeight %||% 1500,

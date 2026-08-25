@@ -53,7 +53,7 @@ add_pie_chart <- function(hc,
 
   # Colour each slice explicitly when the caller supplies `pie_options$colors`
   # (aligned to the data order), so the donut can match a map's palette.
-  pie_options$colors <- apply_pattern_colors(pie_options$colors)
+  pie_options$colors <- apply_pattern_colors(pie_options$colors) # nolint: object_usage_linter
   if (!is.null(pie_options$colors) && length(series_data) > 0) {
     slice_colors <- rep_len(pie_options$colors, length(series_data))
     for (i in seq_along(series_data)) {
@@ -64,11 +64,11 @@ add_pie_chart <- function(hc,
   hc |>
     highcharter::hc_chart(crop = FALSE) |>
     highcharter::hc_title(
-      text = nz_or_null(title_options$title),
+      text = nz_or_null(title_options$title), # nolint: object_usage_linter
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    add_astho_subtitle(subtitle_options) |>
+    add_astho_subtitle(subtitle_options) |> # nolint: object_usage_linter
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,
@@ -114,7 +114,7 @@ add_pie_chart <- function(hc,
 #' @noRd
 apply_pie_size_hook <- function(hc, size_options = list(), n_items = NULL) {
   if (isTRUE(size_options$fillWidth)) {
-    return(add_fill_width_hook(
+    return(add_fill_width_hook( # nolint: object_usage_linter
       hc,
       min_height = size_options$minHeight %||% 260,
       max_height = size_options$maxHeight %||% 700
@@ -123,7 +123,7 @@ apply_pie_size_hook <- function(hc, size_options = list(), n_items = NULL) {
   if (isFALSE(size_options$legendBump) || is.null(n_items)) {
     return(hc)
   }
-  add_legend_height_hook(
+  add_legend_height_hook( # nolint: object_usage_linter
     hc,
     n_items = n_items,
     per_item = size_options$perItem %||% 26,

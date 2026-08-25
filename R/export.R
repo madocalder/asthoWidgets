@@ -5,8 +5,8 @@
 #' @export
 
 viz_export <- function(
-    hc,
-    export_options = list()) {
+  hc,
+  export_options = list()) {
   hc |>
     highcharter::hc_exporting(
       enabled = export_options$enabled %||% TRUE,

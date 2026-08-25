@@ -43,16 +43,16 @@ add_bubble_chart <- function(hc,
                              legend_options = list(),
                              caption_options = list()) {
   z_col <- z_col %||% y_col
-  validate_columns(data, c(x_col, y_col, z_col, group_col), "add_bubble_chart")
+  validate_columns(data, c(x_col, y_col, z_col, group_col), "add_bubble_chart") # nolint: object_usage_linter
   has_groups <- !is.null(group_col)
 
   hc <- hc |>
     highcharter::hc_title(
-      text = nz_or_null(title_options$title),
+      text = nz_or_null(title_options$title), # nolint: object_usage_linter
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    add_astho_subtitle(subtitle_options) |>
+    add_astho_subtitle(subtitle_options) |> # nolint: object_usage_linter
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,
@@ -62,7 +62,7 @@ add_bubble_chart <- function(hc,
       type = xAxis_options$type %||% "category",
       categories = xAxis_options$categories,
       title = list(text = xAxis_options$title %||% NULL),
-      labels = labels_with_style(xAxis_options$labels)
+      labels = labels_with_style(xAxis_options$labels) # nolint: object_usage_linter
     ) |>
     highcharter::hc_yAxis(
       title = list(text = yAxis_options$title %||% NULL),
