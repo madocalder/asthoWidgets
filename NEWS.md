@@ -84,7 +84,7 @@
 
 # asthoWidgets 0.0.3
 
-* Move dataviz theme fromt he app into the package: exports `dataviz_colors`,
+* Move dataviz theme from the app into the package: exports `dataviz_colors`,
   `dataviz_palettes`, and `get_astho_hc_theme()`. Widgets now ship a
    self-contained Highcharter theme.
 

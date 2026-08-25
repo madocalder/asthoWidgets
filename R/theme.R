@@ -10,18 +10,19 @@
 #' @export
 dataviz_colors <- list(
 
-  # Main colors
+  # ASTHO brand colors
   astho_blue    = "#005182",
   astho_orange  = "#C05711",
-  yellow_ochre  = "#EBB41F",
   sky_blue      = "#56bde9",
-  teal_green    = "#35A584",
   light_sage    = "#B6D094",
-  burnt_umber   = "#90361F",
   pale_lilac    = "#E2CFEA",
 
-  # Neutrals
+  # Other main colors
+  yellow_ochre  = "#EBB41F",
+  teal_green    = "#35A584",
+  burnt_umber   = "#90361F",
 
+  # Neutrals
   dark_slate    = "#242c3d",
   medium_slate  = "#636b7f",
   na_color      = "#C4B8B2",
