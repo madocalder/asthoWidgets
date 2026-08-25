@@ -5,7 +5,7 @@
 #' Each row becomes one bubble. \code{x_col} and \code{y_col} position
 #' the bubble; \code{z_col} sets the bubble size (defaults to
 #' \code{y_col} if not supplied). Supplying \code{group_col} splits the
-#' data into one series per unique value, so the colour palette can
+#' data into one series per unique value, so the color palette can
 #' encode a categorical variable.
 #'
 #' @param   hc   A \code{highchart} object, typically from

@@ -2,15 +2,15 @@
 % Please edit documentation in R/theme.R
 \name{dataviz_palettes}
 \alias{dataviz_palettes}
-\title{ASTHO data-visualisation colour palettes}
+\title{ASTHO data-visualisation color palettes}
 \format{
-A named list of character vectors of hex colour strings.
+A named list of character vectors of hex color strings.
 }
 \usage{
 dataviz_palettes
 }
 \description{
-Named character vectors of hex colours derived from \code{dataviz_colors},
+Named character vectors of hex colors derived from \code{dataviz_colors},
 suitable for passing to \code{highcharter::hc_colors()} or as the
 \code{colors} entry in the \code{color_options} list accepted by
 \code{add_data_layers_to_map()}.

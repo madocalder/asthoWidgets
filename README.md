@@ -8,7 +8,7 @@
 )
 <!-- badges: end -->
 
-Reusable Shiny widgets for the ASTHO Profile app. Charts, choropleths, tables, KPI cards, and definition popovers, all themed to ASTHO's brand (Jost typography, ASTHO blue / orange / yellow palette).
+Reusable Shiny widgets for the ASTHO Profile app. Charts, choropleths, tables, KPI cards, and definition popovers, all themed to ASTHO's brand (Jost typography, ASTHO data viz color palette).
 
 ## Installation
 
