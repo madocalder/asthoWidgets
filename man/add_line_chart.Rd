@@ -10,6 +10,8 @@ add_line_chart(
   x_col,
   y_col,
   group_col = NULL,
+  high_col = NULL,
+  low_col = NULL,
   line_options = list(),
   xAxis_options = list(),
   yAxis_options = list(),
@@ -24,20 +26,74 @@ add_line_chart(
 \item{hc}{A \code{highchart} object, typically from
 \code{create_base_chart(type = "line")}.}
 
-\item{data}{A data.frame.}
+\item{data}{A data.frame containing the data to plot.}
 
-\item{x_col, y_col, group_col}{Column names (strings). \code{group_col}
-is optional.}
+\item{x_col}{Column name (string) for the x-axis values.}
 
-\item{line_options}{Optional: \code{lineWidth} (default \code{4}),
-\code{markerEnabled} (default \code{TRUE}), \code{dataLabels}.}
+\item{y_col}{Column name (string) for the y-axis values.}
 
-\item{xAxis_options, yAxis_options, title_options, subtitle_options, tooltip_options, legend_options, caption_options}{Same shape as \code{add_column_chart()}.}
+\item{group_col}{Optional column name (string) for grouping data into
+multiple series.}
+
+\item{high_col}{Optional column name (string) for the high values in
+a range series.}
+
+\item{low_col}{Optional column name (string) for the low values in
+a range series.}
+
+\item{line_options}{List of line styling options. Supports \code{lineWidth}
+(default \code{4}), \code{markerEnabled} (default \code{TRUE}),
+\code{markerRadius} (default \code{6}), and \code{dataLabels}.}
+
+\item{xAxis_options}{List of x-axis customization options. Supports
+\code{categories}, \code{title}, and \code{labels} (passed to
+\code{labels_with_style}).}
+
+\item{yAxis_options}{List of y-axis customization options. Supports
+\code{title}, \code{min} (default \code{0}), \code{max}, and
+\code{labels} (passed to \code{labels_with_style}).}
+
+\item{title_options}{List of title options. Supports \code{title}
+(main title text), \code{margin} (default \code{10}), and
+\code{widthAdjust} (default \code{-60}).}
+
+\item{subtitle_options}{List of subtitle options. Passed to
+\code{add_astho_subtitle()}.}
+
+\item{tooltip_options}{List of tooltip customization options. Supports
+\code{pointFormat} (default \code{"<b>{point.name}</b>: {point.y}"}),
+\code{headerFormat} (default \code{""}), \code{useHTML} (default
+\code{TRUE}), and \code{shared} (default \code{FALSE}).}
+
+\item{legend_options}{List of legend customization options. Supports
+\code{enabled} (default \code{has_groups}), \code{layout} (default
+\code{"horizontal"}), \code{align} (default \code{"center"}),
+\code{verticalAlign} (default \code{"bottom"}), and \code{titleText}.}
+
+\item{caption_options}{List of caption options. Supports \code{text},
+\code{useHTML} (default \code{TRUE}), and \code{margin} (default
+\code{20}).}
 }
 \value{
-A \code{highchart} object.
+A \code{highchart} object with the line series added.
 }
 \description{
 Handles single-series and multi-series trend lines. When \code{group_col}
-is supplied, one line is rendered per unique value.
+is supplied, one line is rendered per unique value. Optionally supports
+range visualization with high/low columns.
+}
+\examples{
+\dontrun{
+# Basic line chart
+hc <- create_base_chart("line")
+add_line_chart(hc, data = df, x_col = "date", y_col = "value")
+
+# Grouped line chart
+add_line_chart(hc, data = df, x_col = "date", y_col = "value",
+               group_col = "category")
+
+# Line chart with range
+add_line_chart(hc, data = df, x_col = "date", y_col = "value",
+               high_col = "high", low_col = "low")
+}
 }
