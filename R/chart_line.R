@@ -76,7 +76,8 @@ add_line_chart <- function(hc,
                            subtitle_options = list(),
                            tooltip_options = list(),
                            legend_options = list(),
-                           caption_options = list()
+                           caption_options = list(),
+                           range_options = list()
                            ) {
   validate_columns(data, c(x_col, y_col, group_col), "add_line_chart") # nolint: object_usage_linter
   has_groups <- !is.null(group_col)
@@ -153,9 +154,10 @@ add_line_chart <- function(hc,
     hc <- if (has_range) {
       hc |> highcharter::hc_add_series(
         data = build_point_data(data, x_col, y_col, high_col, low_col),
-        type = "areasplinerange",
+        type = "arearange",
         zIndex = -3,
-        fillOpacity = .3,
+        fillOpacity = range_options$opacity  %||%  .3,
+        lineWidth = range_options$lineWidth  %||% 0,
         linkedTo = ":previous"
       )
     }

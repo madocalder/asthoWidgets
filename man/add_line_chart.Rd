@@ -19,7 +19,8 @@ add_line_chart(
   subtitle_options = list(),
   tooltip_options = list(),
   legend_options = list(),
-  caption_options = list()
+  caption_options = list(),
+  range_options = list()
 )
 }
 \arguments{
