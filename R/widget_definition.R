@@ -74,4 +74,3 @@ aw_definition_popover_dependencies <- function() {
     "})();"
   ))
 }
-
