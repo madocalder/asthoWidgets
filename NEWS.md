@@ -1,3 +1,10 @@
+# asthoWidgets 0.3.3
+
+* fix: `aw_definition_popover_dependencies()` no longer throws
+  `MutationObserver.observe: Argument 1 is not an object` on initial page
+  load. The inline script now waits for `DOMContentLoaded` before creating
+  the observer and guards against a null `document.body` (#15).
+  
 # asthoWidgets 0.3.2
 
 * feat: Update color palette to align with updated 2025 color palette
