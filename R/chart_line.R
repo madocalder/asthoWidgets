@@ -42,6 +42,10 @@
 #' @param caption_options List of caption options. Supports \code{text},
 #'   \code{useHTML} (default \code{TRUE}), and \code{margin} (default
 #'   \code{20}).
+#' @param range_options List of options for the range (arearange) series
+#'   when \code{high_col} and \code{low_col} are supplied. Supports
+#'   \code{opacity} (default \code{0.3}) and \code{lineWidth} (default
+#'   \code{0}).
 #' @return A \code{highchart} object with the line series added.
 #' @export
 #'
