@@ -61,7 +61,7 @@ aw_definition_popover_dependencies <- function() {
     "    });",
     "  }",
     "  function start(){",
-    "    if (!document.body) return;",              // guard: DOM not ready yet
+    "    if (!document.body) return;",
     "    init();",
     "    var obs = new MutationObserver(init);",
     "    obs.observe(document.body, { childList: true, subtree: true });",
@@ -69,7 +69,7 @@ aw_definition_popover_dependencies <- function() {
     "  if (document.readyState === 'loading') {",
     "    document.addEventListener('DOMContentLoaded', start);",
     "  } else {",
-    "    start();",                                 // already past DOMContentLoaded
+    "    start();",
     "  }",
     "})();"
   ))
