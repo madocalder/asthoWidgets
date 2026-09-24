@@ -66,23 +66,24 @@
 
 # nolint end
 
-add_line_chart <- function(hc,
-                           data,
-                           x_col,
-                           y_col,
-                           group_col = NULL,
-                           high_col = NULL,
-                           low_col = NULL,
-                           line_options = list(),
-                           xAxis_options = list(), # nolint: object_name_linter
-                           yAxis_options = list(), # nolint: object_name_linter
-                           title_options = list(),
-                           subtitle_options = list(),
-                           tooltip_options = list(),
-                           legend_options = list(),
-                           caption_options = list(),
-                           range_options = list()
-                           ) {
+add_line_chart <- function(
+    hc,
+    data,
+    x_col,
+    y_col,
+    group_col = NULL,
+    high_col = NULL,
+    low_col = NULL,
+    line_options = list(),
+    xAxis_options = list(), # nolint: object_name_linter
+    yAxis_options = list(), # nolint: object_name_linter
+    title_options = list(),
+    subtitle_options = list(),
+    tooltip_options = list(),
+    legend_options = list(),
+    caption_options = list(),
+    range_options = list()
+) {
   validate_columns(data, c(x_col, y_col, group_col), "add_line_chart") # nolint: object_usage_linter
   has_groups <- !is.null(group_col)
   has_range <- !is.null(high_col) & !is.null(low_col)
