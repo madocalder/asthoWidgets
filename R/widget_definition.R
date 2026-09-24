@@ -47,18 +47,30 @@ aw_definition_popover <- function(label,
 #' Drop the result into the app head once. It registers all current
 #' and future popover triggers on the page. Bootstrap does not auto-
 #' wire popovers by default.
+#'
 #' @export
 aw_definition_popover_dependencies <- function() {
   htmltools::tags$script(htmltools::HTML(
-    "(function(){function init(){",
-    "var els = document.querySelectorAll('[data-bs-toggle=\"popover\"]');",
-    "els.forEach(function(el){",
-    "if (window.bootstrap && bootstrap.Popover) {",
-    "bootstrap.Popover.getOrCreateInstance(el);}});}",
-    "document.addEventListener('DOMContentLoaded', init);",
-    "if (document.readyState !== 'loading') { init(); }",
-    "var obs = new MutationObserver(init);",
-    "obs.observe(document.body, { childList: true, subtree: true });",
+    "(function(){",
+    "  function init(){",
+    "    var els = document.querySelectorAll('[data-bs-toggle=\"popover\"]');",
+    "    els.forEach(function(el){",
+    "      if (window.bootstrap && bootstrap.Popover) {",
+    "        bootstrap.Popover.getOrCreateInstance(el);",
+    "      }",
+    "    });",
+    "  }",
+    "  function start(){",
+    "    if (!document.body) return;",              #// guard: DOM not ready yet
+    "    init();",
+    "    var obs = new MutationObserver(init);",
+    "    obs.observe(document.body, { childList: true, subtree: true });",
+    "  }",
+    "  if (document.readyState === 'loading') {",
+    "    document.addEventListener('DOMContentLoaded', start);",
+    "  } else {",
+    "    start();",                                 #// already past DOMContentLoaded
+    "  }",
     "})();"
   ))
 }
