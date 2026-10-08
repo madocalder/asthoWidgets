@@ -67,22 +67,22 @@
 # nolint end
 
 add_line_chart <- function(
-  hc,
-  data,
-  x_col,
-  y_col,
-  group_col = NULL,
-  high_col = NULL,
-  low_col = NULL,
-  line_options = list(),
-  xAxis_options = list(), # nolint: object_name_linter
-  yAxis_options = list(), # nolint: object_name_linter
-  title_options = list(),
-  subtitle_options = list(),
-  tooltip_options = list(),
-  legend_options = list(),
-  caption_options = list(),
-  range_options = list()
+    hc,
+    data,
+    x_col,
+    y_col,
+    group_col = NULL,
+    high_col = NULL,
+    low_col = NULL,
+    line_options = list(),
+    xAxis_options = list(), # nolint: object_name_linter
+    yAxis_options = list(), # nolint: object_name_linter
+    title_options = list(),
+    subtitle_options = list(),
+    tooltip_options = list(),
+    legend_options = list(),
+    caption_options = list(),
+    range_options = list()
 ) {
   validate_columns(data, c(x_col, y_col, group_col), "add_line_chart") # nolint: object_usage_linter
   has_groups <- !is.null(group_col)
@@ -142,34 +142,28 @@ add_line_chart <- function(
   hc$x$hc_opts$symbols <- line_marker_symbols() # nolint: object_usage_linter
   hc <- attach_marker_symbols(hc) # nolint: object_usage_linter
 
-  hc <- if (has_groups) {
-    hc |> highcharter::hc_add_series_list(
+  if (has_groups) {
+    hc <- hc |> highcharter::hc_add_series_list(
       build_grouped_series(data, x_col, y_col, group_col, "line") # nolint: object_usage_linter
     )
   } else {
-
-
-
     hc <- hc |> highcharter::hc_add_series(
       type = "line",
       name = legend_options$titleText %||% yAxis_options$title %||% y_col,
       data = build_point_data(data, x_col, y_col) # nolint: object_usage_linter
     )
 
-    hc <- if (has_range) {
-      hc |> highcharter::hc_add_series(
+    if (has_range) {
+      hc <- hc |> highcharter::hc_add_series(
         data = build_point_data(data, x_col, y_col, high_col, low_col),
         type = "arearange",
         zIndex = -3,
-        fillOpacity = range_options$opacity  %||%  .3,
-        lineWidth = range_options$lineWidth  %||% 0,
+        fillOpacity = range_options$opacity %||% .3,
+        lineWidth = range_options$lineWidth %||% 0,
         linkedTo = ":previous"
       )
     }
-
   }
-
-
 
   apply_export_naming(hc, title_options$title, xAxis_options$title %||% x_col) # nolint: object_usage_linter
 }
