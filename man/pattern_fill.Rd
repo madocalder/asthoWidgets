@@ -7,8 +7,8 @@
 pattern_fill(shape, background, foreground = NULL)
 }
 \arguments{
-\item{shape}{One of \code{pattern_fill_shapes()}, or \code{"na"} for
-the missing-data motif.}
+\item{shape}{One of \code{pattern_fill_shapes()}, \code{"solid"} for
+a plain unfilled colour, or \code{"na"} for the missing-data motif.}
 
 \item{background}{Background colour (hex string), normally the
 category's solid palette colour.}
