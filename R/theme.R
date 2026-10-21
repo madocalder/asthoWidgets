@@ -29,7 +29,10 @@ dataviz_colors <- list(
 
   # Shades and tints
   palest_blue   = "#CAE6F2",
-  astho_navy    = "#003A5D"
+  astho_navy    = "#003A5D",
+
+  tertiary_wine = "#6D3B47"
+
 
 )
 
@@ -79,7 +82,8 @@ dataviz_palettes <- list(
 
   main       = with(dataviz_colors,
                     c(astho_blue, sky_blue, astho_orange, light_sage, teal_green,
-                      yellow_ochre, pale_lilac, burnt_umber)
+                      yellow_ochre, pale_lilac, burnt_umber, palest_blue,
+                      dark_slate, tertiary_wine)
                     )
 
 )
