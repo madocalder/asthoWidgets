@@ -74,7 +74,7 @@ dataviz_palettes <- list(
                     ),
 
   gov_5     = with(dataviz_colors,
-                   c(astho_blue, astho_orange, teal_green, sky_blue, light_sage)
+                   c(astho_orange, astho_blue, teal_green, sky_blue, light_sage)
                    ),
 
   main       = with(dataviz_colors,
