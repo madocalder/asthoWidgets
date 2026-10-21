@@ -25,8 +25,8 @@ pattern_shape_defs <- function() {
     ),
 
     diagonal = list(
-      width = 28, height = 28, transform = "scale(.75)",
-      style = "stroke", strokeWidth = 1.4, shade = "darken",
+      width = 14, height = 14, transform = "scale(.75)",
+      style = "stroke", strokeWidth = 1, shade = "darken",
       d = "M0 28L28 0M-7 7L7-7M21 35L35 21"
     ),
 
@@ -266,8 +266,8 @@ pattern_fill <- function(shape, background, foreground = NULL) {
 #'   \code{\link{pattern_fill}}.
 #' @export
 pattern_fill_shapes <- function() {
-  c("solid", "chainlink", "diagonal", "triangles", "parquet", "honeycomb", "wave",
-    "brick", "grid", "sprinkles", "leaves", "na")
+  c("solid", "triangles", "wave", "grid",  "leaves", "parquet", "chainlink",
+    "diagonal",  "honeycomb", "brick", "sprinkles", "na")
 }
 
 #' Assign a colours vector to a chart
