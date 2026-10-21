@@ -28,7 +28,8 @@ dataviz_colors <- list(
   na_color      = "#C4B8B2",
 
   # Shades and tints
-  palest_blue   = "#CAE6F2"
+  palest_blue   = "#CAE6F2",
+  astho_navy    = "#003A5D"
 
 )
 
@@ -49,6 +50,9 @@ dataviz_palettes <- list(
   blues_3    = with(dataviz_colors,
                     c(palest_blue, sky_blue, astho_blue)),
 
+  blues_5    = with(dataviz_colors,
+                    c(palest_blue, sky_blue, astho_blue, astho_navy, dark_slate)),
+
   ## old name: gov_oranges_4
   warm_4     = with(dataviz_colors,
                     c(light_sage, yellow_ochre, astho_orange, burnt_umber)),
@@ -64,6 +68,9 @@ dataviz_palettes <- list(
                     c(astho_blue, sky_blue, astho_orange, light_sage, teal_green)
                     ),
 
+  gov_5     = with(dataviz_colors,
+                   c(astho_blue, astho_orange, teal_green, sky_blue, light_sage)
+                   ),
 
   main       = with(dataviz_colors,
                     c(astho_blue, sky_blue, astho_orange, light_sage, teal_green,
