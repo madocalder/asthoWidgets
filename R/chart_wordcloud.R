@@ -24,7 +24,7 @@ add_word_cloud <- function(hc,
                            subtitle_options = list(),
                            tooltip_options = list(),
                            caption_options = list()) {
-  validate_columns(data, c(word_col, weight_col), "add_word_cloud")
+  validate_columns(data, c(word_col, weight_col), "add_word_cloud") # nolint: object_usage_linter
 
   series_data <- lapply(seq_len(nrow(data)), function(i) {
     list(name = data[[word_col]][i], weight = data[[weight_col]][i])
@@ -32,11 +32,11 @@ add_word_cloud <- function(hc,
 
   hc |>
     highcharter::hc_title(
-      text = nz_or_null(title_options$title),
+      text = nz_or_null(title_options$title), # nolint: object_usage_linter
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    add_astho_subtitle(subtitle_options) |>
+    add_astho_subtitle(subtitle_options) |> # nolint: object_usage_linter
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,

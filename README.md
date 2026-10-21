@@ -6,6 +6,8 @@
 ](
   https://github.com/madocalder/asthoWidgets/actions/workflows/R-CMD-check.yaml
 )
+
+[![lint.yaml](https://github.com/madocalder/asthoWidgets/actions/workflows/lint.yaml/badge.svg)](https://github.com/madocalder/asthoWidgets/actions/workflows/lint.yaml)
 <!-- badges: end -->
 
 Reusable Shiny widgets for the ASTHO Profile app. Charts, choropleths, tables, KPI cards, and definition popovers, all themed to ASTHO's brand (Jost typography, ASTHO data viz color palette).

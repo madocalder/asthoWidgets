@@ -35,18 +35,18 @@ add_sankey_chart <- function(hc,
                              tooltip_options = list(),
                              legend_options = list(),
                              caption_options = list()) {
-  validate_columns(data, c(from_col, to_col, weight_col), "add_sankey_chart")
+  validate_columns(data, c(from_col, to_col, weight_col), "add_sankey_chart") # nolint: object_usage_linter
 
   series_data <- build_sankey_point_data(data, from_col, to_col, weight_col)
 
   hc |>
     highcharter::hc_chart(type = "sankey") |>
     highcharter::hc_title(
-      text = nz_or_null(title_options$title),
+      text = nz_or_null(title_options$title), # nolint: object_usage_linter
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    add_astho_subtitle(subtitle_options) |>
+    add_astho_subtitle(subtitle_options) |> # nolint: object_usage_linter
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,

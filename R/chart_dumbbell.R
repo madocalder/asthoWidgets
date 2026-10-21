@@ -53,7 +53,7 @@ add_dumbbell_chart <- function(hc,
                                tooltip_options = list(),
                                legend_options = list(),
                                caption_options = list()) {
-  validate_columns(data, c(x_col, low_col, high_col, group_col), "add_dumbbell_chart")
+  validate_columns(data, c(x_col, low_col, high_col, group_col), "add_dumbbell_chart") # nolint: object_usage_linter
   has_groups <- !is.null(group_col)
 
   categories <- xAxis_options$categories %||% unique(as.character(data[[x_col]]))
@@ -64,11 +64,11 @@ add_dumbbell_chart <- function(hc,
       inverted = TRUE
     ) |>
     highcharter::hc_title(
-      text = nz_or_null(title_options$title),
+      text = nz_or_null(title_options$title), # nolint: object_usage_linter
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    add_astho_subtitle(subtitle_options) |>
+    add_astho_subtitle(subtitle_options) |> # nolint: object_usage_linter
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,
@@ -78,7 +78,7 @@ add_dumbbell_chart <- function(hc,
       type = "category",
       categories = categories,
       title = list(text = xAxis_options$title %||% NULL),
-      labels = labels_with_style(xAxis_options$labels)
+      labels = labels_with_style(xAxis_options$labels) # nolint: object_usage_linter
     ) |>
     highcharter::hc_yAxis(
       title = list(text = yAxis_options$title %||% NULL),

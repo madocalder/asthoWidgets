@@ -1,3 +1,22 @@
+# asthoWidgets 0.3.3
+
+* fix: `aw_definition_popover_dependencies()` no longer throws
+  `MutationObserver.observe: Argument 1 is not an object` on initial page
+  load. The inline script now waits for `DOMContentLoaded` before creating
+  the observer and guards against a null `document.body` (#15).
+  
+# asthoWidgets 0.3.2
+
+* feat: Update color palette to align with updated 2025 color palette
+* style: add '# nolint: object_usage_linter' to internal functions to satisfy
+  object_usage_linter
+
+
+# asthoWidgets 0.3.1
+
+* feat: add pattern-fill colour objects and colour hook for charts and maps (#69)
+* style: wrap long JS formatter string to satisfy line_length_linter
+
 # asthoWidgets 0.3.0
 
 * feat: line charts cycle through eight distinct marker shapes, adding pentagon,

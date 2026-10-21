@@ -105,11 +105,19 @@ validate_columns <- function(data, cols, fn_name) {
 #' Keeps every column in `data` so tooltip templates can reference them
 #' via `{point.<col>}`.
 #' @noRd
-build_point_data <- function(data, x_col, y_col) {
+build_point_data <- function(data, x_col, y_col, high_col = NULL, low_col = NULL) {
   data$name <- data[[x_col]]
   data$y    <- data[[y_col]]
+
+  if (!is.null(high_col) && !is.null(low_col)) {
+    data$high <- data[[high_col]]
+    data$low <- data[[low_col]]
+  }
+
+
   highcharter::list_parse(data)
 }
+
 
 #' Split `data` by `group_col` and emit one series per unique value.
 #' @noRd

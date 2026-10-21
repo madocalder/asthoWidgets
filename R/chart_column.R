@@ -51,7 +51,7 @@ add_column_chart <- function(hc,
                              tooltip_options = list(),
                              legend_options = list(),
                              caption_options = list()) {
-  validate_columns(data, c(x_col, y_col, group_col), "add_column_chart")
+  validate_columns(data, c(x_col, y_col, group_col), "add_column_chart") # nolint: object_usage_linter
   has_groups <- !is.null(group_col)
 
   hc <- hc |>
@@ -59,11 +59,11 @@ add_column_chart <- function(hc,
       inverted = column_options$inverted %||% FALSE
     ) |>
     highcharter::hc_title(
-      text = nz_or_null(title_options$title),
+      text = nz_or_null(title_options$title), # nolint: object_usage_linter
       margin = title_options$margin %||% 10,
       widthAdjust = title_options$widthAdjust %||% -60
     ) |>
-    add_astho_subtitle(subtitle_options) |>
+    add_astho_subtitle(subtitle_options) |> # nolint: object_usage_linter
     highcharter::hc_caption(
       text = caption_options$text,
       useHTML = caption_options$useHTML %||% TRUE,
@@ -73,7 +73,7 @@ add_column_chart <- function(hc,
       type = "category",
       categories = as.list(xAxis_options$categories %||% unique(as.character(data[[x_col]]))),
       title = list(text = xAxis_options$title %||% NULL),
-      labels = labels_with_style(xAxis_options$labels)
+      labels = labels_with_style(xAxis_options$labels) # nolint: object_usage_linter
     ) |>
     highcharter::hc_yAxis(
       title = list(text = yAxis_options$title %||% NULL),
@@ -110,19 +110,19 @@ add_column_chart <- function(hc,
       title = list(text = legend_options$titleText %||% NULL)
     )
 
-  hc <- add_grow_for_legend_hook(hc)
+  hc <- add_grow_for_legend_hook(hc) # nolint: object_usage_linter
 
   hc <- if (has_groups) {
     hc |> highcharter::hc_add_series_list(
-      build_grouped_series(data, x_col, y_col, group_col, "column")
+      build_grouped_series(data, x_col, y_col, group_col, "column") # nolint: object_usage_linter
     )
   } else {
     hc |> highcharter::hc_add_series(
       type = "column",
       name = legend_options$titleText %||% yAxis_options$title %||% y_col,
-      data = build_point_data(data, x_col, y_col),
+      data = build_point_data(data, x_col, y_col), # nolint: object_usage_linter
       colorByPoint = column_options$colorByPoint %||% FALSE
     )
   }
-  apply_export_naming(hc, title_options$title, xAxis_options$title %||% x_col)
+  apply_export_naming(hc, title_options$title, xAxis_options$title %||% x_col) # nolint: object_usage_linter
 }
