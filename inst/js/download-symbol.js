@@ -1,18 +1,61 @@
-(function(H) {
-    H.SVGRenderer.prototype.symbols.downloadIcon = function(x, y, w, h) {
-        // Original path based on 640x640, scale and offset
-        var scaleX = w / 640;
-        var scaleY = h / 640;
+(function (H) {
+  if (!H || !H.SVGRenderer) return;
 
-        // You need to convert your original path coordinates point by point.
-        // Below is an example framework; in practice, use R or a script to pre-convert all coordinates
-        // Method: newX = x + originalX * scaleX, newY = y + originalY * scaleY
+  H.SVGRenderer.prototype.symbols.downloadIcon = function (x, y, w, h) {
+    var sx = w / 640;
+    var sy = h / 640;
+    function X(v) { return x + v * sx; }
+    function Y(v) { return y + v * sy; }
 
-        // To keep it simple, here is an example using simplified path points (you need to replace with the complete converted path):
-        return [
-            'M', x + 344 * scaleX, y + 88 * scaleY,
-            'L', x + 344 * scaleX, y + 334.1 * scaleY,
-            // ... other path commands
-        ];
-    };
+    return [
+      // --- Arrow shaft + arrowhead + upper tray (first subpath) ---
+      'M', X(344),   Y(88),
+      'C', X(344),   Y(74.7),  X(333.3), Y(64),    X(320),   Y(64),
+      'C', X(306.7), Y(64),    X(296),   Y(74.7),  X(296),   Y(88),
+      'L', X(296),   Y(334.1),
+      'L', X(233),   Y(271.1),
+      'C', X(223.6), Y(261.7), X(208.4), Y(261.7), X(199.1), Y(271.1),
+      'C', X(189.8), Y(280.5), X(189.7), Y(295.7), X(199.1), Y(305),
+      'L', X(303),   Y(409),
+      'C', X(312.4), Y(418.4), X(327.6), Y(418.4), X(336.9), Y(409),
+      'L', X(441),   Y(305),
+      'C', X(450.4), Y(295.6), X(450.4), Y(280.4), X(441),   Y(271.1),
+      'C', X(431.6), Y(261.8), X(416.4), Y(261.7), X(407.1), Y(271.1),
+      'L', X(344.1), Y(334.1),
+      'L', X(344.1), Y(88),
+      'z',
+
+      // --- Tray body (second subpath, outer outline) ---
+      'M', X(162.2), Y(336),
+      'L', X(160),   Y(336),
+      'C', X(124.7), Y(336),   X(96),    Y(364.7), X(96),    Y(400),
+      'L', X(96),    Y(480),
+      'C', X(96),    Y(515.3), X(124.7), Y(544),   X(160),   Y(544),
+      'L', X(480),   Y(544),
+      'C', X(515.3), Y(544),   X(544),   Y(515.3), X(544),   Y(480),
+      'L', X(544),   Y(400),
+      'C', X(544),   Y(364.7), X(515.3), Y(336),   X(480),   Y(336),
+      'L', X(477.8), Y(336),
+      'L', X(429.8), Y(384),
+      'L', X(480),   Y(384),
+      'C', X(488.8), Y(384),   X(496),   Y(391.2), X(496),   Y(400),
+      'L', X(496),   Y(480),
+      'C', X(496),   Y(488.8), X(488.8), Y(496),   X(480),   Y(496),
+      'L', X(160),   Y(496),
+      'C', X(151.2), Y(496),   X(144),   Y(488.8), X(144),   Y(480),
+      'L', X(144),   Y(400),
+      'C', X(144),   Y(391.2), X(151.2), Y(384),   X(160),   Y(384),
+      'L', X(210.2), Y(384),
+      'L', X(162.2), Y(336),
+      'z',
+
+      // --- Tray indicator dot (third subpath) ---
+      'M', X(464),   Y(440),
+      'C', X(464),   Y(426.7), X(453.3), Y(416),   X(440),   Y(416),
+      'C', X(426.7), Y(416),   X(416),   Y(426.7), X(416),   Y(440),
+      'C', X(416),   Y(453.3), X(426.7), Y(464),   X(440),   Y(464),
+      'C', X(453.3), Y(464),   X(464),   Y(453.3), X(464),   Y(440),
+      'z'
+    ];
+  };
 }(Highcharts));
