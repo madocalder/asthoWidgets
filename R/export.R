@@ -16,9 +16,9 @@ viz_export <- function(hc, export_options = list()) {
       contextButton = list(
         symbol            = export_options$contextButton$symbol            %||% "downloadIcon",
         symbolSize        = export_options$contextButton$symbolSize        %||% 32,
-        symbolStrokeWidth = export_options$contextButton$symbolStrokeWidth %||% 1,
-        symbolFill        = export_options$contextButton$symbolFill        %||% "#47BA83",
-        symbolStroke      = export_options$contextButton$symbolStroke      %||% "#47BA83",
+        symbolStrokeWidth = export_options$contextButton$symbolStrokeWidth %||% 0,
+        symbolFill        = export_options$contextButton$symbolFill        %||% "#1a8062",
+        symbolStroke      = export_options$contextButton$symbolStroke      %||% "none",
         menuItems = export_options$contextButton$menuItems %||% c(
           "downloadPNG", "downloadSVG", "downloadCSV", "downloadXLS", "openInCloud"
         )
