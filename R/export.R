@@ -20,7 +20,7 @@ viz_export <- function(
       allowHTML = export_options$allowHTML %||% TRUE,
       buttons = list(
         contextButton = list(
-          symbol = export_options$contextButton$symbol %||% "menu",
+          symbol = export_options$contextButton$symbol %||% "download",
           symbolStrokeWidth = export_options$contextButton$symbolStrokeWidth %||% 2,
           symbolFill = export_options$contextButton$symbolFill %||% "#47BA83",
           symbolStroke = export_options$contextButton$symbolStroke %||% "#47BA83",
