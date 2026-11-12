@@ -392,3 +392,17 @@ add_legend_height_hook <- function(hc,
     )
   )
 }
+
+
+#' Attach the custom download-symbol script (see inst/js/download-symbol.js).
+#' @noRd
+attach_download_symbol <- function(hc) {
+  dep <- htmltools::htmlDependency(
+    name    = "download-symbol",
+    version = "0.1.0",
+    src     = system.file("js", package = "asthoWidgets"),
+    script  = "download-symbol.js"
+  )
+  hc$dependencies <- c(hc$dependencies, list(dep))
+  hc
+}
