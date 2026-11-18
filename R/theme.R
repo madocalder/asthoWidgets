@@ -206,7 +206,7 @@ get_astho_hc_theme <- function() {
         defaults["fontFamily"],
         list(
           fontSize = "14px",
-          maxWidth = "50%",
+          maxWidth = "50vw",
           whiteSpace = "normal"
         )
       )
