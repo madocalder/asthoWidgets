@@ -12,13 +12,18 @@ create_base_map <- function(hc_thm, export_options = list()) {
   highcharter::highchart(
     type = "map"
   ) |>
-    # pattern-fill colour support (see patterns.R); inert unless a pattern
-    # object is used as a colour
+    highcharter::hc_chart(
+      accessibility = list(
+        enabled = TRUE,
+        keyboardNavigation = list(enabled = TRUE)
+      )
+    ) |>
     highcharter::hc_add_dependency("modules/pattern-fill.js") |>
+    highcharter::hc_add_dependency("modules/accessibility.js") |>  # Add accessibility module
     highcharter::hc_add_theme(
       hc_thm = hc_thm
     ) |>
-    viz_export( # nolint: object_usage_linter
+    viz_export(
       export_options
     )
 }

@@ -151,6 +151,7 @@ get_astho_hc_theme <- function() {
     chart = list(
       backgroundColor = NULL
     ),
+
     style = defaults["fontFamily"],
     title = list(
       style = c(
