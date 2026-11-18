@@ -37,15 +37,11 @@ create_base_chart <- function(type,
     hc_thm$colors <- apply_pattern_colors(hc_thm$colors)
   }
   highcharter::highchart() |>
-    highcharter::hc_chart(
-      type = type,
-      accessibility = list(
-        enabled = TRUE,
-        keyboardNavigation = list(enabled = TRUE)
-      )
-    ) |>
+    highcharter::hc_chart(type = type) |>
     highcharter::hc_add_dependency("modules/pattern-fill.js") |>
-    highcharter::hc_add_dependency("modules/accessibility.js") |>  # Add accessibility module
+    # REMOVE this line: highcharter::hc_add_dependency("modules/accessibility.js")
+    # ADD this line instead:
+    highcharter::hc_accessibility(enabled = TRUE, keyboardNavigation = list(enabled = TRUE)) |>
     highcharter::hc_add_theme(hc_thm = hc_thm) |>
     viz_export(export_options)
 }

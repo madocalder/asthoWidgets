@@ -7,19 +7,14 @@
 #'   download interface for the maps. See `viz_export()`.
 #' @return   `highchart` htmlwidget
 #' @export
-
 create_base_map <- function(hc_thm, export_options = list()) {
   highcharter::highchart(
     type = "map"
   ) |>
-    highcharter::hc_chart(
-      accessibility = list(
-        enabled = TRUE,
-        keyboardNavigation = list(enabled = TRUE)
-      )
-    ) |>
     highcharter::hc_add_dependency("modules/pattern-fill.js") |>
-    highcharter::hc_add_dependency("modules/accessibility.js") |>  # Add accessibility module
+    # REMOVE this line: highcharter::hc_add_dependency("modules/accessibility.js")
+    # ADD this line instead:
+    highcharter::hc_accessibility(enabled = TRUE, keyboardNavigation = list(enabled = TRUE)) |>
     highcharter::hc_add_theme(
       hc_thm = hc_thm
     ) |>
