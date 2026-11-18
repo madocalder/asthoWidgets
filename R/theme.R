@@ -181,7 +181,22 @@ get_astho_hc_theme <- function() {
     xAxis = axis_theme,
     yAxis = axis_theme,
     legend = legend_theme,
+    plotOptions = list(
+      series = list(
+        dataLabels = list(
+          style = c(
+            defaults[c("fontFamily", "color")],
+            list(
+              # fontSize = "14px",
+              # fontWeight = "normal",
+              textOutline = "none"
+            )
+          )
+        )
+      )
+    ),
     tooltip = list(
+      minWidth = 200,
       # render outside the plot so narrow charts don't clip it
       outside = TRUE,
       padding = 10,
