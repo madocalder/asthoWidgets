@@ -196,7 +196,7 @@ get_astho_hc_theme <- function() {
       )
     ),
     tooltip = list(
-      minWidth = 200,
+      minWidth = "30vw",
       # render outside the plot so narrow charts don't clip it
       outside = TRUE,
       padding = 10,
@@ -206,7 +206,7 @@ get_astho_hc_theme <- function() {
         defaults["fontFamily"],
         list(
           fontSize = "14px",
-          maxWidth = "50vw",
+          # maxWidth = "50vw",
           whiteSpace = "normal"
         )
       )
