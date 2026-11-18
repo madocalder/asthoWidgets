@@ -20,7 +20,7 @@ viz_export <- function(hc, export_options = list()) {
         symbolFill        = export_options$contextButton$symbolFill        %||% "#4679AE",
         symbolStroke      = export_options$contextButton$symbolStroke      %||% "none",
         menuItems = export_options$contextButton$menuItems %||% c(
-          "downloadPNG", "downloadSVG", "downloadCSV", "downloadXLS", "openInCloud"
+          "downloadPNG", "downloadSVG", "downloadCSV", "downloadXLS"
         )
       )
     ),

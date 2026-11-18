@@ -7,14 +7,15 @@
 #'   download interface for the maps. See `viz_export()`.
 #' @return   `highchart` htmlwidget
 #' @export
-create_base_map <- function(hc_thm, export_options = list()) {
+create_base_map <- function(hc_thm, export_options = list(
+  contextButton = list(menuItems = c("downloadCSV", "downloadXLS")))
+  ) {
   highcharter::highchart(
     type = "map"
   ) |>
+    highcharter::hc_add_dependency("modules/accessibility.js") |>
     highcharter::hc_add_dependency("modules/pattern-fill.js") |>
-    # REMOVE this line: highcharter::hc_add_dependency("modules/accessibility.js")
-    # ADD this line instead:
-    highcharter::hc_accessibility(enabled = TRUE, keyboardNavigation = list(enabled = TRUE)) |>
+    # highcharter::hc_accessibility(enabled = TRUE, keyboardNavigation = list(enabled = TRUE)) |>
     highcharter::hc_add_theme(
       hc_thm = hc_thm
     ) |>

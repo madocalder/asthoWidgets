@@ -4,7 +4,11 @@
 \alias{create_base_map}
 \title{Create an empty highchart map object into which data layers can be added}
 \usage{
-create_base_map(hc_thm, export_options = list())
+create_base_map(
+  hc_thm,
+  export_options = list(contextButton = list(menuItems = c("downloadCSV",
+    "downloadXLS")))
+)
 }
 \arguments{
 \item{hc_thm}{Highchart theme object, as would be used in \code{hc_add_theme()}.}
